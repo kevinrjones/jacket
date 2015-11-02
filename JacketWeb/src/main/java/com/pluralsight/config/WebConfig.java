@@ -111,7 +111,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return dataSource;
 	}
 
-
 	@Bean(destroyMethod = "")
 	@Profile("production")
 	public DataSource dataSource() throws IllegalArgumentException, NamingException {
