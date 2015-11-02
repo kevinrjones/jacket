@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
+apply plugin: 'spring-boot'
 
 cargo {
     containerId = 'tomcat8x'

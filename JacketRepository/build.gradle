@@ -4,6 +4,13 @@ buildscript {
     }
 }
 
+apply plugin: 'spring-boot'
+
+bootRepackage {
+  enabled = false
+}
+
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-test"
@@ -37,4 +44,3 @@ task migrateProduction {
 
 migrateProduction.finalizedBy flywayMigrate  
 migrateTest.finalizedBy flywayMigrate  
-

@@ -23,7 +23,6 @@ allprojects {
   apply plugin: 'eclipse-wtp'
   apply plugin: 'idea'
   apply plugin: 'io.spring.dependency-management' 
-  apply plugin: 'spring-boot'
   
   version = '0.1-SNAPSHOT'
   
