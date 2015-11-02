@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-test"
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    
+    compile 'mysql:mysql-connector-java:5.1.35'
+    
+    compile 'javax.inject:javax.inject:1'
+    compile 'commons-logging:commons-logging:1.2'
+}
+
+
+task migrateProduction {
+	group = "deploy"
+	description = "Run migration scripts for production"
+	doFirst {
+		 flyway {
+		    url = 'jdbc:mysql://localhost:3306'
+		    user = 'kevin'
+		    password = 'p4ssw0rd'
+		    schemas = ['jacket']
+		    locations = ["filesystem:${projectDir}/../migrations/common", "filesystem:${projectDir}/../migrations/mysql"]
+		    sqlMigrationPrefix = ""
+		    baselineOnMigrate = true
+		    outOfOrder = true
+		}
+	}
+}
+
+
+
+migrateProduction.finalizedBy flywayMigrate  
+migrateTest.finalizedBy flywayMigrate  
+

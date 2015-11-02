@@ -1,0 +1,127 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.2'
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.cargo'
+
+cargo {
+    containerId = 'tomcat8x'
+    port = 8080
+
+    deployable {
+        file = file('build\\libs\\JacketWeb-0.0.1-SNAPSHOT.war')
+        context = 'jacketweb'
+    }
+
+    local {
+        homeDir = file('C:\\home\\kevinj\\tomcat')
+        configHomeDir = file('C:\\home\\kevinj\\tomcat')
+    }
+
+    remote {
+        hostname = 'localhost'
+        username = 'tomcat'
+        password = 'tomcat'
+    }
+}
+
+war {
+    baseName = 'JacketWeb'
+    version = '0.0.1-SNAPSHOT'    
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+
+configurations {
+    providedRuntime
+}
+
+
+dependencies {
+    def cargoVersion = '1.4.5'
+
+//    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.boot:spring-boot-starter-hateoas")
+//    compile("org.springframework.boot:spring-boot-starter-jersey")
+//    compile("org.springframework.boot:spring-boot-starter-websocket")
+//    compile("org.springframework.boot:spring-boot-starter-ws")
+//    runtime("mysql:mysql-connector-java")
+
+	
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+ 	compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.apache.tomcat:tomcat-dbcp:8.0.27"
+ 
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+    providedRuntime "org.apache.tomcat.embed:tomcat-embed-jasper"
+
+    compile "javax.servlet:jstl"
+    
+    compile 'javax.inject:javax.inject:1'
+    compile 'c3p0:c3p0:0.9.1.2'    
+    
+    compile "org.springframework:spring-orm:4.1.7.RELEASE"
+    
+    testCompile("org.springframework.boot:spring-boot-starter-test") 
+
+    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+          "org.codehaus.cargo:cargo-ant:$cargoVersion"
+    
+}
+
+tasks.withType(Copy) {
+    eachFile { println it.file }
+}
+
+// must set the jacket_password environment variable for the production password
+task copyContext (type: Copy) {	
+	from 'configfiles'			
+    into 'src/main/webapp/META-INF'
+    include 'context.xml'
+    
+    expand(password: "$System.env.jacket_password")
+}
+
+task copyProperties (type: Copy) {	
+	from 'configfiles'			
+    into 'src/main/resources'
+    include 'application.properties'
+    
+    expand(password: "$System.env.jacket_password")
+}
+
+task copyConfiguration {
+	description 'Copy and expand the configuration files used by the project'
+	dependsOn copyContext, copyProperties
+}
+
+assemble.dependsOn copyConfiguration
+
+cargoRunLocal.dependsOn assemble
+cargoRedeployLocal.dependsOn assemble
+cargoRedeployRemote.dependsOn assemble
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}
