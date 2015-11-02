@@ -111,7 +111,7 @@ task copyConfiguration {
 	dependsOn copyContext, copyProperties
 }
 
-assemble.dependsOn copyConfiguration
+processResources.dependsOn copyConfiguration
 
 cargoRunLocal.dependsOn assemble
 cargoRedeployLocal.dependsOn assemble
