@@ -67,6 +67,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
  	compile "org.springframework.boot:spring-boot-devtools"
     compile "org.apache.tomcat:tomcat-dbcp:8.0.27"
+    compile "org.springframework.boot:spring-boot-starter-security"
  
     providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
     providedRuntime "org.apache.tomcat.embed:tomcat-embed-jasper"
