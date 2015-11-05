@@ -21,7 +21,7 @@ public class Link {
 		this.log = log;
 	}
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = {"/", ""})
 	public String index() {
 		service.getAllEntries();
 		return "link/index";
