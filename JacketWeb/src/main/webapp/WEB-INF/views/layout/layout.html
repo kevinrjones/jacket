@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
 <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Jacket</title>
 <link th:href="@{/resources/css/site.css}" rel="stylesheet" />
-<link th:href="@{/resources/bootstrap/dist/css/bootstrap.css}"  rel="stylesheet" />
-<link th:href="@{/resources/bootstrap/dist/css/bootstrap-theme.css}"  rel="stylesheet" />
+<link th:href="@{/resources/bootstrap/dist/css/bootstrap.css}"
+	rel="stylesheet" />
+<link th:href="@{/resources/bootstrap/dist/css/bootstrap-theme.css}"
+	rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 </head>
 <body>
 	<!--/* Standard layout can be mixed with Layout Dialect */-->
-	<div class="container">
-		<div layout:fragment="content">
+	<div th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+		<div th:if="${currentUser !=null}">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Log Out" />
+			</form>
+
+			<p th:text="${currentUser.firstName}">
+				sample_user
+			</p>
 		</div>
+	</div>
+	<div class="container">
+		<div layout:fragment="content"></div>
 	</div>
 </body>
 </html>

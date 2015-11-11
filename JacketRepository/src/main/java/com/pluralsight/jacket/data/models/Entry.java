@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.models;
+package com.pluralsight.jacket.data.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

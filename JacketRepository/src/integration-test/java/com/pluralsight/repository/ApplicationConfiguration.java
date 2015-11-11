@@ -51,7 +51,7 @@ public class ApplicationConfiguration {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.models" });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.data.models" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -73,8 +73,9 @@ public class ApplicationConfiguration {
 	public DataSource dataSourceDev() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/jackettest");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/jacket");
 		dataSource.setUsername("kevin");
+		if(password == null) password = "p4ssw0rd";
 		dataSource.setPassword(password);
 		return dataSource;
 	}

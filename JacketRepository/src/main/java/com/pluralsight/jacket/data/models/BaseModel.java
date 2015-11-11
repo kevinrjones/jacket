@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pluralsight.jacket.models;
+package com.pluralsight.jacket.data.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +25,7 @@ public class BaseModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 
 	public Long getId() {
 		return id;
