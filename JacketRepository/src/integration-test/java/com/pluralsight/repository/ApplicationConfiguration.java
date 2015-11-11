@@ -75,7 +75,6 @@ public class ApplicationConfiguration {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/jacket");
 		dataSource.setUsername("kevin");
-		if(password == null) password = "p4ssw0rd";
 		dataSource.setPassword(password);
 		return dataSource;
 	}

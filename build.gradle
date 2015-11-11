@@ -82,8 +82,7 @@ if(project.hasProperty('mysql_user')) {
 			 flyway {
 			    url = 'jdbc:mysql://localhost:3306'
 			    user = mysqlUser
-//			    password = System.getenv("jacket_password")
-			    password = 'p4ssw0rd'
+			    password = System.getenv("jacket_password")
 			    schemas = ['jackettest']
 			    locations = ["filesystem:${projectDir}/../migrations/common", "filesystem:${projectDir}/../migrations/mysql"]
 			    sqlMigrationPrefix = ""
