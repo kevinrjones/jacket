@@ -46,14 +46,13 @@ public class UserRepositoryUserDetailsService implements JacketUserService {
 		user.setPassword(passwordEncoder.encode(serviceUser.getPassword()));
 
 		user.setEmail(serviceUser.getEmail());
-		// user.setRole(new Role(Integer.valueOf(1), user));
 
 		if (userRepository.save(user) != null) {
 			AuthenticatedUser authenticatedUser = new AuthenticatedUser(user);
 			Authentication auth = new UsernamePasswordAuthenticationToken(authenticatedUser, null,
 					new ArrayList<GrantedAuthority>());
 			
-			// todo: wrap this is a bean
+			// todo: wrap this is a bean?
 			SecurityContextHolder.getContext().setAuthentication(auth);
 
 			return authenticatedUser;
@@ -63,8 +62,7 @@ public class UserRepositoryUserDetailsService implements JacketUserService {
 	}
 
 	private boolean emailExist(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		return userRepository.findByEmail(email) != null;
 	}
 
 	/*

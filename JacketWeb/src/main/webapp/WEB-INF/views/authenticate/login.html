@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form th:action="@{/login}" method="post" class="navbar-form">
+		<form th:action="@{/account/login}" method="post" class="navbar-form">
 			<div class="" id="login-modal">
 				<div class="modal-dialog">
 					<div class="loginmodal-container">
@@ -17,7 +17,7 @@
 						<input type="password" name="password" placeholder="Password" />
 						<button type="submit" name="login" class="login loginmodal-submit">Login</button>
 						<div class="login-help">
-							<a th:href="@{/register}">Register</a> - <a href="#">Forgot Password</a>
+							<a th:href="@{/account/register}">Register</a> - <a href="#">Forgot Password</a>
 						</div>
 					</div>
 				</div>

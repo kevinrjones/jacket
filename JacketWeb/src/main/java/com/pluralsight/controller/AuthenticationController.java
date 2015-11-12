@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.pluralsight.jacket.models.AuthenticatedUser;
 import com.pluralsight.jacket.models.JacketUser;
 import com.pluralsight.jacket.services.EmailExistsException;
 import com.pluralsight.jacket.services.JacketUserService;
@@ -25,19 +24,19 @@ public class AuthenticationController {
 		this.jacketUserService = jacketUserService;
 	}
 
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/account/login")
 	public String login() {
 		log.debug("*********Login method");
 		return "authenticate/login";
 	}
 
-	@RequestMapping(value = "/register", method=RequestMethod.GET)
+	@RequestMapping(value = "/account/register", method=RequestMethod.GET)
 	public String register() {
 		return "authenticate/register";
 	}
 	
 	// todo: use a VM instead of JacketUser
-	@RequestMapping(value = "/register", method=RequestMethod.POST)
+	@RequestMapping(value = "/account/register", method=RequestMethod.POST)
 	public String register(JacketUser user) {
 		try {
 			jacketUserService.registerNewUserAccount(user);

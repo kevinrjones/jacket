@@ -11,22 +11,16 @@ import com.pluralsight.jacket.data.models.User;
 public class AuthenticatedUser implements UserDetails {
 	private String email;
 	private String password;
-	private String firstName;
-	private String lastName;
+	private String name;
 
 	public AuthenticatedUser(User user){
 		email = user.getEmail();
-		firstName = user.getFirstName();
-		lastName = user.getLastName();
+		name = user.getFirstName() + " " + user.getLastName();
 		password = user.getPassword();
 	}
 	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
+	public String getName() {
+		return name;
 	}
 
 	public String getEmail() {

@@ -36,17 +36,16 @@
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
-					<!-- <li th:text="${currentUser.firstName}"></li> -->
 				</ul>
-				<div
-					th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
-					<div th:if="${currentUser !=null}">
-						<form th:action="@{/logout}" method="post" class="navbar-form">
+				<div th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+					<div class="nav" th:if="${currentUser !=null}">
+						<div class="nav pull-right login-name"
+							th:text="${currentUser?.name}"></div>
+						<form th:action="@{/account/logout}" method="post" class="navbar-form">
 							<div class="input-group">
 								<button type="submit" class="button btn-link">Log Out</button>
 							</div>
 						</form>
-						<!-- <p th:text="${currentUser.firstName}">sample_user</p> -->
 					</div>
 				</div>
 			</div>
@@ -66,7 +65,7 @@
 			<p class="text-muted">Place sticky footer content here.</p>
 		</div>
 	</footer>
-	<script th:src="@{/resources/jquery/dist/jquery.min..js}"></script>
+	<script th:src="@{/resources/jquery/dist/jquery.min.js}"></script>
 	<script th:src="@{/resources/bootstrap/dist/js/bootstrap.min.js}"></script>
 </body>
 </html>
