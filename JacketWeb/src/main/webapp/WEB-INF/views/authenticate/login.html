@@ -7,11 +7,10 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form th:action="@{/login}" method="post">
-			<label for="username">User Name</label>
-			<input type="text" id="username" name="username"/>
-			<label for="password">Password</label>
-			<input  type="text" id="password" name="password" />
+		<form th:action="@{/login}" method="post" class="navbar-form">
+			<label for="username">Email Address</label> <input type="text"
+				id="username" name="username" /> <label for="password">Password</label>
+			<input type="password" id="password" name="password" />
 			<button type="submit">Login</button>
 		</form>
 	</div>

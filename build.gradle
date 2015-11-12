@@ -30,6 +30,13 @@ allprojects {
     jcenter()
   }
 
+  idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+  }
+  
   dependencies {
     testCompile 'org.hamcrest:hamcrest-core:1.3'
     testCompile 'junit:junit:4.12'
