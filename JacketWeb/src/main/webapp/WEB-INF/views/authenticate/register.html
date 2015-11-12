@@ -8,29 +8,14 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{/register}" method="post">
-			<p>
-			<label for="email">Email</label>
-			<input type="text" id="email" name="email"/>
-			</p>
-			<p>
-			<label for="email">First Name</label>
-			<input type="text" id="firstname" name="firstName"/>
-			</p>
-			<p>
-			<label for="email">Last Name</label>
-			<input type="text" id="lastname" name="lastName"/>
-			</p>
-			<p>
-			<label for="password">Password</label>
-			<input  type="password" id="password" name="password" />
-			</p>
-			<p>
-			<label for="password">Repeat Password</label>
-			<input  type="password" id="repeatpassword" name="repeatPassword" />
-			</p>
-			<p>
-			<button type="submit">Login</button>
-			</p>
+			<div class="loginmodal-container">
+				<input type="text" id="email" name="email"  placeholder="EMail"/> 
+				<input type="text" id="firstname" name="firstName"  placeholder="First Name"/> 
+				<input type="text" id="lastname" name="lastName"  placeholder="Last Name"/> 
+				<input type="password" id="password" name="password"  placeholder="Password"/> 
+				<input type="password" id="repeatpassword" name="repeatPassword" placeholder="Repeat Password"/>
+				<button type="submit" class="login loginmodal-submit">Register</button>
+			</div>
 		</form>
 	</div>
 </body>
