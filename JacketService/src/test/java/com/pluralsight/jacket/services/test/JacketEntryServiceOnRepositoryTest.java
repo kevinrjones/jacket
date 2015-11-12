@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.pluralsight.jacket.models.Entry;
+import com.pluralsight.jacket.data.models.Entry;
 import com.pluralsight.jacket.models.JacketEntry;
 import com.pluralsight.jacket.services.JacketEntryServiceOnRepository;
 import com.pluralsight.repository.EntryRepository;

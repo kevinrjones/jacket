@@ -5,8 +5,11 @@ import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.pluralsight.jacket.models.AuthenticatedUser;
 import com.pluralsight.jacket.services.JacketEntryService;
+import com.pluralsight.security.CurrentUser;
 
 @Controller
 @RequestMapping(value = { "/", "/link" })
@@ -21,9 +24,12 @@ public class Link {
 		this.log = log;
 	}
 
-	@RequestMapping(value = "/")
-	public String index() {
+	@RequestMapping(value = {"/", ""})
+	public ModelAndView index(@CurrentUser AuthenticatedUser user) {
 		service.getAllEntries();
-		return "link/index";
+		ModelAndView mv = new ModelAndView("link/index");
+		// map authenticateduser to VM
+		mv.addObject("user", user);		
+		return mv;
 	}
 }

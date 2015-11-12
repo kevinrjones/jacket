@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
 <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
-<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Task List</title>
+
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Jacket</title>
 <link th:href="@{/resources/css/site.css}" rel="stylesheet" />
-<link th:href="@{/resources/bootstrap/dist/css/bootstrap.css}"  rel="stylesheet" />
-<link th:href="@{/resources/bootstrap/dist/css/bootstrap-theme.css}"  rel="stylesheet" />
+<link th:href="@{/resources/bootstrap/dist/css/bootstrap.css}"
+	rel="stylesheet" />
+<link th:href="@{/resources/bootstrap/dist/css/bootstrap-theme.css}"
+	rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 </head>
 <body>
-	<!--/* Standard layout can be mixed with Layout Dialect */-->
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Jacket</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<div th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+					<div class="nav" th:if="${currentUser !=null}">
+						<div class="nav pull-right login-name"
+							th:text="${currentUser?.name}"></div>
+						<form th:action="@{/account/logout}" method="post" class="navbar-form">
+							<div class="input-group">
+								<button type="submit" class="button btn-link">Log Out</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+		<!--/* Standard layout can be mixed with Layout Dialect */-->
+	</nav>
+
 	<div class="container">
-		<div layout:fragment="content">
-			<!-- ============================================================================ -->
-			<!-- This content is only used for static prototyping purposes (natural templates)-->
-			<!-- and is therefore entirely optional, as this markup fragment will be included -->
-			<!-- from "fragments/header.html" at runtime.                                     -->
-			<!-- ============================================================================ -->
-			<h1>Static content for prototyping purposes only</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				Praesent scelerisque neque neque, ac elementum quam dignissim
-				interdum. Phasellus et placerat elit. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit. Praesent scelerisque neque neque, ac
-				elementum quam dignissim interdum. Phasellus et placerat elit.</p>
+		<div class="starter-template">
+			<div layout:fragment="content"></div>
 		</div>
 	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Place sticky footer content here.</p>
+		</div>
+	</footer>
+	<script th:src="@{/resources/jquery/dist/jquery.min.js}"></script>
+	<script th:src="@{/resources/bootstrap/dist/js/bootstrap.min.js}"></script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<head>
+<title>Login</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/account/register}" method="post">
+			<div class="loginmodal-container">
+				<input type="text" id="email" name="email"  placeholder="EMail"/> 
+				<input type="text" id="firstname" name="firstName"  placeholder="First Name"/> 
+				<input type="text" id="lastname" name="lastName"  placeholder="Last Name"/> 
+				<input type="password" id="password" name="password"  placeholder="Password"/> 
+				<input type="password" id="repeatpassword" name="repeatPassword" placeholder="Repeat Password"/>
+				<button type="submit" class="login loginmodal-submit">Register</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

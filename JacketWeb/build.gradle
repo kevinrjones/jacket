@@ -11,6 +11,21 @@ apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
 apply plugin: 'spring-boot'
 
+def os = System.getProperty("os.name").toLowerCase() 
+def tomcatHome = ""
+def tomcatHomeConfig = ""
+
+if(project.hasProperty('tomcat_home')) {
+	tomcatHome = project.tomcat_home 
+} else {
+    logger.error("tomcat_home not set. Please add a USER_HOME/.gradle/gradle.properties and add a tomcat_home value") 
+}
+if(project.hasProperty('tomcat_home_config')) {
+	tomcatHomeConfig = project.tomcat_home_config
+} else {
+    logger.error("tomcat_home_config not set. Please add a USER_HOME/.gradle/gradle.properties and add a tomcat_home_config value") 
+}
+
 cargo {
     containerId = 'tomcat8x'
     port = 8080
@@ -21,11 +36,12 @@ cargo {
     }
 
     local {
-        homeDir = file('C:\\home\\kevinj\\tomcat')
-        configHomeDir = file('C:\\home\\kevinj\\tomcat')
+        homeDir = file(tomcatHome)
+        configHomeDir = file(tomcatHome)
     }
 
     remote {
+        // todo: put these in a properties?
         hostname = 'localhost'
         username = 'tomcat'
         password = 'tomcat'
@@ -67,6 +83,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
  	compile "org.springframework.boot:spring-boot-devtools"
     compile "org.apache.tomcat:tomcat-dbcp:8.0.27"
+    compile "org.springframework.boot:spring-boot-starter-security"
  
     providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
     providedRuntime "org.apache.tomcat.embed:tomcat-embed-jasper"
@@ -116,6 +133,7 @@ processResources.dependsOn copyConfiguration
 cargoRunLocal.dependsOn assemble
 cargoRedeployLocal.dependsOn assemble
 cargoRedeployRemote.dependsOn assemble
+
 eclipse {
     classpath {
          containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
