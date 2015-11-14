@@ -4,7 +4,6 @@ body {
 
 .starter-template {
 	padding: 40px 15px;
-	text-align: center;
 }
 
 .footer {
@@ -35,6 +34,11 @@ body {
 	{
 	color: #fff;
 	text-decoration: none;
+}
+
+.loginmodal-container {
+	width: 60%;
+	margin: 0 auto;
 }
 
 .loginmodal-container input[type=text], input[type=password] {
@@ -73,4 +77,29 @@ body {
 div.login-name {
 	color: #9d9d9d;
 	padding: 15px;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+	border: none;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.field-error {
+	border-bottom: 1px solid #a94442 !important;
+}
+.error-message {
+	text-align: left;
+	margin-bottom: 5px;
+	display: inline-block;
+    font-size: small;    
+ 	margin-left: 8px;
+ }
+
+.error-container {
+	margin-top: -5px;
+}
+
+.error-list {
+	list-style: none;
+	text-align: left;
 }
