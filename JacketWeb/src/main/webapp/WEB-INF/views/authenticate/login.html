@@ -7,14 +7,19 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form th:action="@{/account/login}" method="post" class="navbar-form">
+		<form th:action="@{/account/login}" method="post" class="navbar-form" th:object="${authenticationUser}" >
 			<div class="" id="login-modal">
 				<div class="modal-dialog">
 					<div class="loginmodal-container">
-						<h1>Login to Your Account</h1>
-						 
-						<input type="text" name="username" placeholder="Email" />
-						<input type="password" name="password" placeholder="Password" />
+						<h1>Login to Your Account</h1>						 
+						<input type="text" name="username" placeholder="Email"/>
+						<div class="error-container has-error"> 
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
+						</div>
+						<input type="password" name="password" placeholder="Password"/>
+						<div class="error-container has-error"> 
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
+						</div>
 						<button type="submit" name="login" class="login loginmodal-submit">Login</button>
 						<div class="login-help">
 							<a th:href="@{/account/register}">Register</a> - <a href="#">Forgot Password</a>

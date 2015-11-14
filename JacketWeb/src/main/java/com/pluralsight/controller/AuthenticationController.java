@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pluralsight.jacket.models.JacketUser;
 import com.pluralsight.jacket.services.EmailExistsException;
 import com.pluralsight.jacket.services.JacketUserService;
+import com.pluralsight.jacketweb.viewmodels.AuthenticationUser;
 import com.pluralsight.jacketweb.viewmodels.RegistrationUser;
 
 @Controller
@@ -29,8 +31,8 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "/account/login")
-	public String login() {
-		log.debug("*********Login method");
+	public String login(Model model) {
+		model.addAttribute("authenticationUser", new AuthenticationUser());
 		return "authenticate/login";
 	}
 
@@ -40,7 +42,6 @@ public class AuthenticationController {
 		return "authenticate/register";
 	}
 	
-	// todo: use a VM instead of JacketUser
 	@RequestMapping(value = "/account/register", method=RequestMethod.POST)
 	public String register(@Valid RegistrationUser registrationUser, BindingResult result, Model model) {
 		
