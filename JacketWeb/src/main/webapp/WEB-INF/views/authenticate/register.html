@@ -7,15 +7,30 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form th:action="@{/account/register}" method="post">
+		<form th:action="@{/account/register}" method="post" th:object="${registrationUser}" >
 			<div class="loginmodal-container">
-				<input type="text" id="email" name="email"  placeholder="EMail"/> 
-				<input type="text" id="firstname" name="firstName"  placeholder="First Name"/> 
-				<input type="text" id="lastname" name="lastName"  placeholder="Last Name"/> 
-				<input type="password" id="password" name="password"  placeholder="Password"/> 
-				<input type="password" id="repeatpassword" name="repeatPassword" placeholder="Repeat Password"/>
+				<input type="text" id="email" name="email" placeholder="EMail" th:field="*{email}" />
+				<div class="error-container"> 
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect email</span>
+				</div>
+				<input type="text" id="firstname" name="firstName" placeholder="First Name" th:field="*{firstName}"/> 
+				<div class="error-container"> 
+				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="fieldError">Incorrect email</span>
+				</div>
+				<input type="text" id="lastname" name="lastName" placeholder="Last Name" th:field="*{lastName}"/> 
+				<div class="error-container"> 
+				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="fieldError">Incorrect email</span>
+				</div>
+				<input type="password" id="password" name="password" placeholder="Password" th:field="*{password}"/> 
+				<div class="error-container"> 
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect email</span>
+				</div>
+				<input  type="password" id="repeatpassword" name="repeatPassword" placeholder="Repeat Password" th:field="*{repeatPassword}" />
+				<div class="error-container"> 
+				<span th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="fieldError">Incorrect email</span>
+				</div>
 				<button type="submit" class="login loginmodal-submit">Register</button>
-			</div>
+			</div>				
 		</form>
 	</div>
 </body>

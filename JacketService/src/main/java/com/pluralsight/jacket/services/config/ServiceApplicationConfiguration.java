@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.pluralsight.jacket.services")
 public class ServiceApplicationConfiguration {
-//	@Autowired
-//	private UserDetailsService userDetailsService;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService, PasswordEncoder encoder)
