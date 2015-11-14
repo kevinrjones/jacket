@@ -3,7 +3,7 @@
   <Resource name="jdbc/JacketDB" 
   			auth="Container"
             type="javax.sql.DataSource" 
-            username="kevin"
+            username="jacket"
             password="${password}"
             poolPreparedStatements="true"
             initialSize="25"

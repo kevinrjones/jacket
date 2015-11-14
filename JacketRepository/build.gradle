@@ -28,7 +28,7 @@ task migrateProduction {
 	doFirst {
 		 flyway {
 		    url = 'jdbc:mysql://localhost:3306'
-		    user = 'kevin'
+		    user = 'jacket'
 		    password = System.getenv("jacket_password")
 		    schemas = ['jacket']
 		    locations = ["filesystem:${projectDir}/../migrations/common", "filesystem:${projectDir}/../migrations/mysql"]
