@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pluralsight.jacket.data.models.Entry;
+import com.pluralsight.jacket.repository.EntryRepository;
 
 public class EntryRepositoryTest extends AbstractTest {
 

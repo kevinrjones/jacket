@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.pluralsight.jacket.data.models.User;
 import com.pluralsight.jacket.models.AuthenticatedUser;
 import com.pluralsight.jacket.models.JacketUser;
-import com.pluralsight.repository.UsersRepository;
+import com.pluralsight.jacket.repository.UsersRepository;
 
 @Service
 public class UserRepositoryUserDetailsService implements JacketUserService {

@@ -1,4 +1,4 @@
-package com.pluralsight.config;
+package com.pluralsight.jacketweb.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

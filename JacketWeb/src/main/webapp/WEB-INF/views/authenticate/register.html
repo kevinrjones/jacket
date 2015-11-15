@@ -9,27 +9,30 @@
 	<div layout:fragment="content">
 		<form th:action="@{/account/register}" method="post" th:object="${registrationUser}">
 			<div class="loginmodal-container">
-				<input type="text" id="email" name="email" placeholder="EMail" th:field="*{email}" th:errorclass="field-error"/>
+				<input type="text" id="email" name="email" th:placeholder="#{email}" th:field="*{email}" th:errorclass="field-error"/>
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
 				</div>
-				<input type="text" id="firstname" name="firstName" placeholder="First Name" th:field="*{firstName}" th:errorclass="field-error"/> 
+				<input type="text" id="firstname" name="firstName" th:placeholder="#{firstName}" th:field="*{firstName}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message help-block">Incorrect email</span>
 				</div>
-				<input type="text" id="lastname" name="lastName" placeholder="Last Name" th:field="*{lastName}" th:errorclass="field-error"/> 
+				<input type="text" id="lastname" name="lastName" th:placeholder="#{lastName}" th:field="*{lastName}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message help-block">Incorrect email</span>
 				</div>
-				<input type="password" id="password" name="password" placeholder="Password" th:field="*{password}" th:errorclass="field-error"/> 
+				<input type="password" id="password" name="password" th:placeholder="#{pwd}" th:field="*{password}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message help-block">Incorrect email</span>
 				</div>
-				<input  type="password" id="repeatpassword" name="repeatPassword" placeholder="Repeat Password" th:field="*{repeatPassword}" th:errorclass="field-error" />
+				<input  type="password" id="repeatpassword" name="repeatPassword" th:placeholder="#{repeatPassword}" th:field="*{repeatPassword}" th:errorclass="field-error" />
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="error-message help-block">Incorrect email</span>
 				</div>
-				<button type="submit" class="login loginmodal-submit">Register</button>
+				<button type="submit" class="login loginmodal-submit" th:text="#{register}">Register</button>
+				<div class="login-help">
+					<a th:href="@{/account/login}" th:text="#{login}">Login</a> - <a href="#"  th:text="#{forgotPassword}">Forgot Password</a>
+				</div>		
 			</div>				
 		</form>
 	</div>
