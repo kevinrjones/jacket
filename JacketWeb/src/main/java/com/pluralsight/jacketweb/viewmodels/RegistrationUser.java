@@ -5,20 +5,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class RegistrationUser {
 	
-	@NotEmpty(message="Enter an email")
-	@Email(message="Invalid email address")
+	@NotEmpty
+	@Email
 	private String email;
 	
-	@NotEmpty(message="Enter a first name")
+	@NotEmpty
 	private String firstName;
 	
-	@NotEmpty(message="Enter a last name")
+	@NotEmpty
 	private String lastName;
 	
-	@NotEmpty(message="Enter a password")
+	@NotEmpty
 	private String password;
 	
-	@NotEmpty(message="Enter a repeat password")
+	@NotEmpty
 	private String repeatPassword;
 
 	public String getFirstName() {

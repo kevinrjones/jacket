@@ -1,4 +1,4 @@
-package com.pluralsight.app;
+package com.pluralsight.jacketweb.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

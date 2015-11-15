@@ -1,5 +1,6 @@
-package com.pluralsight.config;
+package com.pluralsight.jacketweb.config;
 
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -12,11 +13,13 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -27,17 +30,22 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.pluralsight")
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.pluralsight.repository")
+@EnableJpaRepositories("com.pluralsight.jacket.repository")
 @EnableTransactionManagement
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -132,6 +140,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public Log createLogger() {
 		return LogFactory.getLog("com.pluralsight");
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
 	}
 
 }

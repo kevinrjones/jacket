@@ -1,4 +1,4 @@
-package com.pluralsight.repository;
+package com.pluralsight.jacket.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

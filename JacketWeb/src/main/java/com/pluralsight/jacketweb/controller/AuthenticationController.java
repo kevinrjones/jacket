@@ -1,4 +1,4 @@
-package com.pluralsight.controller;
+package com.pluralsight.jacketweb.controller;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

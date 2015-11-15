@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pluralsight.jacket.data.models.Entry;
 import com.pluralsight.jacket.models.JacketEntry;
-import com.pluralsight.repository.EntryRepository;
+import com.pluralsight.jacket.repository.EntryRepository;
 
 @Named
 @Transactional(readOnly = true)

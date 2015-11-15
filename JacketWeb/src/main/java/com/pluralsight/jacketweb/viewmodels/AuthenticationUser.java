@@ -5,11 +5,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AuthenticationUser {
 	
-	@NotEmpty(message="Enter an email")
-	@Email(message="Invalid email address")
+	@NotEmpty
+	@Email
 	private String email;
 	
-	@NotEmpty(message="Enter a password")
+	@NotEmpty
 	private String password;
 	
 	public String getPassword() {
