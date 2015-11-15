@@ -39,7 +39,7 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.pluralsight")
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.pluralsight.jacket.repository")
+@EnableJpaRepositories("com.pluralsight.jacket")
 @EnableTransactionManagement
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -88,7 +88,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.models" });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.data.models" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

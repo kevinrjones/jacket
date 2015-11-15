@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.services;
+package com.pluralsight.jacket.security.service;
 
 public class EmailExistsException extends Exception {
 

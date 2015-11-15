@@ -1,10 +1,12 @@
-package com.pluralsight.jacket.data.models;
+package com.pluralsight.jacket.security.data.models;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.pluralsight.jacket.data.models.BaseModel;
 
 @Entity
 @Table(name = "Users")

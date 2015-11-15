@@ -1,8 +1,8 @@
-package com.pluralsight.jacket.services.test;
+package com.pluralsight.jacekt.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
