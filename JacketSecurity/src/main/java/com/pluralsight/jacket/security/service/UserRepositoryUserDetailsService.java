@@ -1,24 +1,22 @@
 
-package com.pluralsight.jacket.services;
+package com.pluralsight.jacket.security.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.pluralsight.jacket.data.models.User;
-import com.pluralsight.jacket.models.AuthenticatedUser;
-import com.pluralsight.jacket.models.JacketUser;
-import com.pluralsight.jacket.repository.UsersRepository;
+import com.pluralsight.jacket.security.data.models.User;
+import com.pluralsight.jacket.security.repository.UsersRepository;
+import com.pluralsight.jacket.security.service.models.AuthenticatedUser;
+import com.pluralsight.jacket.security.service.models.JacketUser;
 
 @Service
 public class UserRepositoryUserDetailsService implements JacketUserService {

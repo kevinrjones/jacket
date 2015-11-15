@@ -1,8 +1,8 @@
-package com.pluralsight.jacket.repository;
+package com.pluralsight.jacket.security.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.pluralsight.jacket.data.models.User;
+import com.pluralsight.jacket.security.data.models.User;
 
 public interface UsersRepository extends CrudRepository<User, Long> {
 

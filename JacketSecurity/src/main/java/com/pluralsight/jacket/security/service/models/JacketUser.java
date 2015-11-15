@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.models;
+package com.pluralsight.jacket.security.service.models;
 
 public class JacketUser {
 	private String email;

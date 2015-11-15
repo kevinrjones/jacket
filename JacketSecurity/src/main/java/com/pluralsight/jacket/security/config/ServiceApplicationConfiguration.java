@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.services.config;
+package com.pluralsight.jacket.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

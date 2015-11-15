@@ -9,11 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.pluralsight.jacket.models.JacketUser;
-import com.pluralsight.jacket.services.EmailExistsException;
-import com.pluralsight.jacket.services.JacketUserService;
+import com.pluralsight.jacket.security.service.EmailExistsException;
+import com.pluralsight.jacket.security.service.JacketUserService;
+import com.pluralsight.jacket.security.service.models.JacketUser;
 import com.pluralsight.jacketweb.viewmodels.AuthenticationUser;
 import com.pluralsight.jacketweb.viewmodels.RegistrationUser;
 

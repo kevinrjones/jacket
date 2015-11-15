@@ -58,9 +58,17 @@ project(':JacketService') {
     }
 }
 
+project(':JacketSecurity') {
+    dependencies {
+      compile project(':JacketRepository')
+      compile project(':JacketService')
+    }
+}
+
 project(':JacketWeb') {
     dependencies {
       compile project(':JacketService')
+      compile project(':JacketSecurity')
     }
 }
 
@@ -72,8 +80,7 @@ if(project.hasProperty('mysql_user')) {
     logger.error("mysql_user not set. Please add a USER_HOME/.gradle/gradle.properties and add a mysql_user value") 
 }
 
-//["JacketRepository", "JacketService", "JacketWeb"].each { name ->
-[ "JacketRepository", "JacketService", "JacketWeb"].each { name ->
+[ "JacketRepository", "JacketService", "JacketWeb", "JacketSecurity"].each { name ->
   project(":$name") { 
     apply plugin: 'org.unbroken-dome.test-sets'
     apply plugin: 'org.flywaydb.flyway'
