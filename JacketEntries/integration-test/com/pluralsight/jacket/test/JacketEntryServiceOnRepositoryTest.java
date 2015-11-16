@@ -1,4 +1,4 @@
-package com.pluralsight.jacekt.test;
+package com.pluralsight.jacket.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -12,15 +12,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.pluralsight.jacket.data.models.Entry;
-import com.pluralsight.jacket.models.JacketEntry;
-import com.pluralsight.jacket.repository.EntryRepository;
-import com.pluralsight.jacket.services.JacketEntryServiceOnRepository;
+import com.pluralsight.jacket.entry.repository.EntryRepository;
+import com.pluralsight.jacket.entry.service.EntryRepositoryEntryDetailsService;
+import com.pluralsight.jacket.entry.service.models.JacketEntry;
 
 /**
  * Created by Kevin on 03/07/2015.
  */
 public class JacketEntryServiceOnRepositoryTest {
-    JacketEntryServiceOnRepository jacketEntryServiceOnRepository;
+    EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
     EntryRepository repository;
     Log log;
     
@@ -35,7 +35,7 @@ public class JacketEntryServiceOnRepositoryTest {
 
         when(repository.findAll()).thenReturn(Arrays.asList(new Entry()));
         
-        JacketEntryServiceOnRepository service = new JacketEntryServiceOnRepository(repository, log);
+        EntryRepositoryEntryDetailsService service = new EntryRepositoryEntryDetailsService(repository, log);
         List<JacketEntry> entries = service.getAllEntries();
 
         assertThat(entries.size()).isEqualTo(1);

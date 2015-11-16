@@ -1,4 +1,4 @@
-package com.pluralsight.repository;
+package com.pluralsight.jacket.test;
 
 
 import static org.hamcrest.Matchers.is;
@@ -9,7 +9,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pluralsight.jacket.data.models.Entry;
-import com.pluralsight.jacket.repository.EntryRepository;
+import com.pluralsight.jacket.entry.repository.EntryRepository;
+import com.pluralsight.repository.AbstractTest;
 
 public class EntryRepositoryTest extends AbstractTest {
 

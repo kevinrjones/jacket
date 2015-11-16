@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.repository;
+package com.pluralsight.jacket.entry.repository;
 
 import javax.inject.Named;
 

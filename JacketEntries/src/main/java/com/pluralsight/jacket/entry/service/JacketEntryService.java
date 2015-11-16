@@ -1,8 +1,8 @@
-package com.pluralsight.jacket.services;
+package com.pluralsight.jacket.entry.service;
 
 import java.util.List;
 
-import com.pluralsight.jacket.models.JacketEntry;
+import com.pluralsight.jacket.entry.service.models.JacketEntry;
 
 /**
  * Created by kevin on 03/07/2015.

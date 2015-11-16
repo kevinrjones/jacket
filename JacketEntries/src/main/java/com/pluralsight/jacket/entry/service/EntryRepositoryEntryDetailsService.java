@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.services;
+package com.pluralsight.jacket.entry.service;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,18 +10,18 @@ import org.apache.commons.logging.Log;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pluralsight.jacket.data.models.Entry;
-import com.pluralsight.jacket.models.JacketEntry;
-import com.pluralsight.jacket.repository.EntryRepository;
+import com.pluralsight.jacket.entry.repository.EntryRepository;
+import com.pluralsight.jacket.entry.service.models.JacketEntry;
 
 @Named
 @Transactional(readOnly = true)
-public class JacketEntryServiceOnRepository implements JacketEntryService {
+public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 
 	EntryRepository repository;
 	Log log;
 	
     @Inject
-    public JacketEntryServiceOnRepository(EntryRepository repository, Log log) {
+    public EntryRepositoryEntryDetailsService(EntryRepository repository, Log log) {
     	this.repository = repository;
     	this.log = log;
     }

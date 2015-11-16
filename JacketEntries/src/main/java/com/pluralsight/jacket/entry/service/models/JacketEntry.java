@@ -1,4 +1,4 @@
-package com.pluralsight.jacket.models;
+package com.pluralsight.jacket.entry.service.models;
 
 import java.util.ArrayList;
 import java.util.List;
