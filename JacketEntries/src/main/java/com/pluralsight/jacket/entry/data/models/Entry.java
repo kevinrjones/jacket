@@ -1,8 +1,10 @@
-package com.pluralsight.jacket.data.models;
+package com.pluralsight.jacket.entry.data.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.pluralsight.jacket.data.models.BaseModel;
 
 @Entity
 @Table(name = "entries")

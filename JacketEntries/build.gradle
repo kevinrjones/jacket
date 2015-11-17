@@ -14,7 +14,8 @@ apply plugin: 'spring-boot'
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.2.0'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
@@ -23,5 +24,11 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
     compile 'commons-logging:commons-logging:1.2'    
 }
+
+
+dependencies {
+  integrationTestCompile project(":JacketRepository").sourceSets.integrationTest.output
+}  
+
 
 

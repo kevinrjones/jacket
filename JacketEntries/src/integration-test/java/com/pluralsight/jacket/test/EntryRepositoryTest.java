@@ -6,12 +6,15 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pluralsight.jacket.data.models.Entry;
+import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.repository.AbstractTest;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 public class EntryRepositoryTest extends AbstractTest {
 
 		@Autowired EntryRepository repository;

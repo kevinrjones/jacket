@@ -9,7 +9,7 @@ import javax.inject.Named;
 import org.apache.commons.logging.Log;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pluralsight.jacket.data.models.Entry;
+import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
 

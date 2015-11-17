@@ -63,6 +63,7 @@ project(':JacketEntries') {
       compile project(':JacketRepository')
     }
 }
+
 project(':JacketWeb') {
     dependencies {
       compile project(':JacketSecurity')
@@ -71,6 +72,7 @@ project(':JacketWeb') {
 }
 
 def mysqlUser = ""
+def mysqlPassword = ""
 
 if(project.hasProperty('mysql_user')) {
 	mysqlUser = project.mysql_user
@@ -78,7 +80,13 @@ if(project.hasProperty('mysql_user')) {
     logger.error("mysql_user not set. Please add a USER_HOME/.gradle/gradle.properties and add a mysql_user value") 
 }
 
-[ "JacketRepository", "JacketWeb", "JacketSecurity"].each { name ->
+if(project.hasProperty('jacket_password')) {
+	mysqlPassword = project.jacket_password
+} else {
+    mysqlPassword = System.getenv("jacket_password") 
+}
+
+[ "JacketRepository", "JacketWeb", "JacketSecurity", "JacketEntries"].each { name ->
   project(":$name") { 
     apply plugin: 'org.unbroken-dome.test-sets'
     apply plugin: 'org.flywaydb.flyway'
@@ -92,11 +100,11 @@ if(project.hasProperty('mysql_user')) {
     task migrateTest {
 		group = "test"
 		description = "Run migration scripts for test"
-		doFirst {
+		doFirst {			
 			 flyway {
-			    url = 'jdbc:mysql://localhost:3306'
+			    url = 'jdbc:mysql://localhost:3306/jackettest'
 			    user = mysqlUser
-			    password = System.getenv("jacket_password")
+			    password = mysqlPassword
 			    schemas = ['jackettest']
 			    locations = ["filesystem:${projectDir}/../migrations/common", "filesystem:${projectDir}/../migrations/mysql"]
 			    sqlMigrationPrefix = ""

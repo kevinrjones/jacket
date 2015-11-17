@@ -10,8 +10,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pluralsight.jacket.data.models.Entry;
+import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.EntryRepositoryEntryDetailsService;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
@@ -19,6 +21,7 @@ import com.pluralsight.jacket.entry.service.models.JacketEntry;
 /**
  * Created by Kevin on 03/07/2015.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 public class JacketEntryServiceOnRepositoryTest {
     EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
     EntryRepository repository;
