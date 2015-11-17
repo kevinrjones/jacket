@@ -8,11 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.pluralsight.repository.ApplicationConfiguration;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan(basePackages = "com.pluralsight")
-@EnableJpaRepositories("com.pluralsight.repository")
-@EnableTransactionManagement
+
 public class EntriesConfiguration extends ApplicationConfiguration {
 
 }

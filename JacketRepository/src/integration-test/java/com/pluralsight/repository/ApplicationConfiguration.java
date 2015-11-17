@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.pluralsight")
-@EnableJpaRepositories("com.pluralsight.repository")
+@EnableJpaRepositories("com.pluralsight.jacket")
 @EnableTransactionManagement
 public class ApplicationConfiguration {
 	@Bean

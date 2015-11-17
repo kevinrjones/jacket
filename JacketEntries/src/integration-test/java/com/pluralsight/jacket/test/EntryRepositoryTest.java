@@ -14,7 +14,6 @@ import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.repository.AbstractTest;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 public class EntryRepositoryTest extends AbstractTest {
 
 		@Autowired EntryRepository repository;

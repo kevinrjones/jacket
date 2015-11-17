@@ -17,12 +17,9 @@ import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.EntryRepositoryEntryDetailsService;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
+import com.pluralsight.repository.AbstractTest;
 
-/**
- * Created by Kevin on 03/07/2015.
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-public class JacketEntryServiceOnRepositoryTest {
+public class JacketEntryServiceOnRepositoryTest extends AbstractTest{
     EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
     EntryRepository repository;
     Log log;
