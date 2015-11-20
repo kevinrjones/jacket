@@ -15,9 +15,8 @@ import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.EntryRepositoryEntryDetailsService;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
-import com.pluralsight.repository.AbstractTest;
 
-public class JacketEntryServiceOnRepositoryTest extends AbstractTest{
+public class JacketEntryServiceOnRepositoryTest {
     EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
     EntryRepository repository;
     Log log;

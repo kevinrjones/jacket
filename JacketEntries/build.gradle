@@ -11,11 +11,17 @@ buildscript {
 
 apply plugin: 'spring-boot'
 
+
+bootRepackage {
+    enabled = false
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
-    
+
+    testCompile 'javax.el:javax.el-api:2.2.4'    
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.2.0'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
