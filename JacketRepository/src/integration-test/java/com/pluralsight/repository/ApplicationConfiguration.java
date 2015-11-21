@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.pluralsight")
-@EnableJpaRepositories("com.pluralsight.jacket.repository")
+@EnableJpaRepositories("com.pluralsight.jacket")
 @EnableTransactionManagement
 public class ApplicationConfiguration {
 	@Bean
@@ -51,7 +51,7 @@ public class ApplicationConfiguration {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.data.models" });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.entry" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -75,7 +75,7 @@ public class ApplicationConfiguration {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/jacket");
 		dataSource.setUsername("jacket");
-		dataSource.setPassword(password);
+		dataSource.setPassword("p4ssw0rd");
 		return dataSource;
 	}
 

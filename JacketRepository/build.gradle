@@ -43,3 +43,5 @@ task migrateProduction {
 
 migrateProduction.finalizedBy flywayMigrate  
 migrateTest.finalizedBy flywayMigrate  
+
+

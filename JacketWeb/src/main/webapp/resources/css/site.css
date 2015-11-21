@@ -64,14 +64,12 @@ body {
 }
 
 .loginmodal-submit {
-	/* border: 1px solid #3079ed; */
 	border: 0px;
 	color: #fff;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	background-color: #4d90fe;
 	padding: 17px 0px;
 	font-size: 14px;
-	/* background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed)); */
 }
 
 div.login-name {
@@ -81,11 +79,11 @@ div.login-name {
 
 .loginmodal-container input[type=text], input[type=password] {
 	border: none;
-	border-bottom: 1px solid #d9d9d9;
+	border-bottom: 1px solid #999999;
 }
 
 .field-error {
-	border-bottom: 1px solid #a94442 !important;
+	border-bottom: 1px solid #f44336 !important;
 }
 .error-message {
 	text-align: left;
@@ -102,4 +100,8 @@ div.login-name {
 .error-list {
 	list-style: none;
 	text-align: left;
+}
+
+.has-error span.help-block {
+	color: #f44336;
 }
