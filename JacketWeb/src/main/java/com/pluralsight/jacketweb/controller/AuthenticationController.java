@@ -29,7 +29,7 @@ public class AuthenticationController {
 		this.jacketUserService = jacketUserService;
 	}
 
-	@RequestMapping(value = "/account/login")
+	@RequestMapping(value = "/account/login", method=RequestMethod.GET)
 	public String login(Model model) {
 		model.addAttribute("authenticationUser", new AuthenticationUser());
 		return "authenticate/login";
