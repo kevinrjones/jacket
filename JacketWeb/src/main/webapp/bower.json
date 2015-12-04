@@ -1,0 +1,22 @@
+{
+  "name": "webapp",
+  "homepage": "https://github.com/kevinrjones/jacket",
+  "authors": [
+    "Kevin Jones <kevin@rocksolidknowledge.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+  }
+}
