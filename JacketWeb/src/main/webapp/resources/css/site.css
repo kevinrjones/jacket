@@ -22,20 +22,21 @@ body {
 	color: #777;
 }
 
-.navbar-form {
-	width: 100px;
-}
-
-#navbar>div>div>form>div.input-group {
-	padding-top: 3px;
-}
-
 #navbar>div>div>form>div>button.btn-link:hover, #navbar>div>div>form>div>button.btn-link:focus
 	{
 	color: #fff;
 	text-decoration: none;
 }
 
+/* move logout button down into line */
+.nav.navbar-left .navbar-form {
+ 	margin-top:11px;
+}
+ .navbar .navbar-right >li >a {
+ 	padding-left:5px;
+ 	padding-right:5px;
+ }
+ 
 .loginmodal-container {
 	width: 60%;
 	margin: 0 auto;
@@ -73,8 +74,8 @@ body {
 }
 
 div.login-name {
-	color: #9d9d9d;
-	padding: 15px;
+	color: #ffffff;
+	padding: 20px;
 }
 
 .loginmodal-container input[type=text], input[type=password] {
@@ -105,3 +106,18 @@ div.login-name {
 .has-error span.help-block {
 	color: #f44336;
 }
+
+/*.popover .arrow, .tooltip .arrow, .popover .tooltip-arrow, .tooltip .tooltip-arrow {
+    display: block;
+}
+
+.popover.bottom .arrow:after {
+  border-bottom-color: white;
+}
+
+.popover {
+	color: black;
+	background-color: white;
+}*/
+
+

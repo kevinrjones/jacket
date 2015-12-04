@@ -17,9 +17,6 @@
 							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
 						</div>
 						<input type="password" name="password" th:placeholder="#{pwd}"/>
-						<div class="error-container has-error"> 
-							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
-						</div>
 						<button type="submit" name="login" class="login loginmodal-submit" th:text="#{login}">Login</button>
 						<div class="login-help">
 							<a th:href="@{/account/register}" th:text="#{register}">Register</a> - <a href="#" th:text="#{forgotPassword}">Forgot Password</a>

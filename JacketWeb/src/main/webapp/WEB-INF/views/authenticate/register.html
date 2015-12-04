@@ -15,19 +15,19 @@
 				</div>
 				<input type="text" id="firstname" name="firstName" th:placeholder="#{firstName}" th:field="*{firstName}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
-					<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message help-block">Incorrect email</span>
+					<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message help-block">Incorrect first name</span>
 				</div>
 				<input type="text" id="lastname" name="lastName" th:placeholder="#{lastName}" th:field="*{lastName}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
-					<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message help-block">Incorrect email</span>
+					<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message help-block">Incorrect last name</span>
 				</div>
 				<input type="password" id="password" name="password" th:placeholder="#{pwd}" th:field="*{password}" th:errorclass="field-error"/> 
 				<div class="error-container has-error"> 
-					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message help-block">Incorrect email</span>
+					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message help-block">Incorrect password</span>
 				</div>
 				<input  type="password" id="repeatpassword" name="repeatPassword" th:placeholder="#{repeatPassword}" th:field="*{repeatPassword}" th:errorclass="field-error" />
 				<div class="error-container has-error"> 
-					<span th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="error-message help-block">Incorrect email</span>
+					<span th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="error-message help-block">Incorrect password</span>
 				</div>
 				<button type="submit" class="login loginmodal-submit" th:text="#{register}">Register</button>
 				<div class="login-help">
