@@ -8,7 +8,8 @@ import java.util.List;
  */
 public class JacketEntry {
 
-    String url;
+	String url;
+    String title;
     List<String> tags;
     boolean isArchived;
     boolean isFavourite;
@@ -20,8 +21,9 @@ public class JacketEntry {
         this.isFavourite = isFavourite;
     }
 
-    public JacketEntry(String url) {
+    public JacketEntry(String url, String title) {
         this.url = url;
+        this.title = title;
         tags = new ArrayList<String>();
         this.isArchived = false;
         this.isFavourite = false;
@@ -31,6 +33,13 @@ public class JacketEntry {
         return url;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
     public void ToggleFavoutite() {
         isFavourite = !isFavourite;
     }
@@ -48,4 +57,10 @@ public class JacketEntry {
         // todo: tag should exist in list already
         tags.remove(tag);
     }
+
+    @Override
+	public String toString() {
+		return "JacketEntry [url=" + url + ", title=" + title + "]";
+	}
+
 }

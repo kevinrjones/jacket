@@ -33,7 +33,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
     	List<JacketEntry> serviceEntries = new LinkedList<JacketEntry>(); 
     	if(entries != null)
     	{
-    		entries.forEach(e -> serviceEntries.add(new JacketEntry(e.getUrl())));
+    		entries.forEach(e -> serviceEntries.add(new JacketEntry(e.getUrl(), e.getTitle())));
     	}
     	else
     	{
@@ -45,8 +45,36 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public void updateEntry(JacketEntry e) {
+	public void updateEntry(JacketEntry jacketEntry) {
 		
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public long addEntry(JacketEntry jacketEntry) {
+		
+		if(jacketEntry == null) throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
+		if(jacketEntry.getTitle() == null) throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
+		if(jacketEntry.getUrl() == null) throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
+
+		Entry entry = new Entry();
+		entry.setTitle(jacketEntry.getTitle());
+		entry.setUrl(jacketEntry.getUrl());
+		
+		repository.save(entry);
+		return entry.getId();
+	}
+
+
+	@Override
+	public JacketEntry getEntry(long id) {
+		Entry entry = repository.findOne(id);
+		
+		if(entry == null) throw new JacketServiceException("Unable to find entry in repository for id " + id);
+		
+		JacketEntry jacketEntry = new JacketEntry(entry.getUrl(), entry.getTitle());		
+		
+		return jacketEntry;
 	}
 }
 
