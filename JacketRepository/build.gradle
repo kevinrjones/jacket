@@ -27,7 +27,7 @@ task migrateProduction {
 	description = "Run migration scripts for production"
 	doFirst {
 		 flyway {
-		    url = 'jdbc:mysql://localhost:3306'
+		    url = 'jdbc:mysql://localhost:3306?useSSL=false'
 		    user = 'jacket'
 		    password = System.getenv("jacket_password")
 		    schemas = ['jacket']
