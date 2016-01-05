@@ -1,8 +1,15 @@
 package com.pluralsight.jacket.entry.service;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,7 +40,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
     	List<JacketEntry> serviceEntries = new LinkedList<JacketEntry>(); 
     	if(entries != null)
     	{
-    		entries.forEach(e -> serviceEntries.add(new JacketEntry(e.getUrl(), e.getTitle())));
+    		entries.forEach(e -> serviceEntries.add(new JacketEntry(e.getUrl(), e.getTitle(), getImageFromEntryBlob(e))));
     	}
     	else
     	{
@@ -41,6 +48,24 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
     	}
     	return serviceEntries;
     }
+
+
+	private Image getImageFromEntryBlob(Entry entry) {
+		Blob blob = entry.getImage();
+		Image image = null;
+		try {
+			byte[] imageBytes = blob.getBytes(1, (int)blob.length());
+			InputStream in = new ByteArrayInputStream(imageBytes);
+			image = ImageIO.read(in);
+		} catch (SQLException e) {
+			log.error("Unable to read Blob", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Unable to read Blob", e);
+			e.printStackTrace();
+		}
+		return image;
+	}
 
 
 	@Override
@@ -72,7 +97,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		
 		if(entry == null) throw new JacketServiceException("Unable to find entry in repository for id " + id);
 		
-		JacketEntry jacketEntry = new JacketEntry(entry.getUrl(), entry.getTitle());		
+		JacketEntry jacketEntry = new JacketEntry(entry.getUrl(), entry.getTitle(), getImageFromEntryBlob(entry));		
 		
 		return jacketEntry;
 	}

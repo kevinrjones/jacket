@@ -1,5 +1,6 @@
 package com.pluralsight.jacket.entry.service.models;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class JacketEntry {
 
 	String url;
     String title;
+    private Image image;
     List<String> tags;
     boolean isArchived;
     boolean isFavourite;
@@ -21,7 +23,7 @@ public class JacketEntry {
         this.isFavourite = isFavourite;
     }
 
-    public JacketEntry(String url, String title) {
+    public JacketEntry(String url, String title, Image image) {
         this.url = url;
         this.title = title;
         tags = new ArrayList<String>();
@@ -61,6 +63,14 @@ public class JacketEntry {
     @Override
 	public String toString() {
 		return "JacketEntry [url=" + url + ", title=" + title + "]";
+	}
+
+	Image getImage() {
+		return image;
+	}
+
+	void setImage(Image image) {
+		this.image = image;
 	}
 
 }

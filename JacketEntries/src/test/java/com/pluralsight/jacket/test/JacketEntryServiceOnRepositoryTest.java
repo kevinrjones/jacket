@@ -1,9 +1,10 @@
 package com.pluralsight.jacket.test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,8 +60,7 @@ public class JacketEntryServiceOnRepositoryTest {
         when(repository.findOne(id)).thenReturn(null);
         
         service = new EntryRepositoryEntryDetailsService(repository, log);
-        JacketEntry entry = service.getEntry(id);
-
+        service.getEntry(id);
     }
     
     @Test
@@ -85,12 +85,17 @@ public class JacketEntryServiceOnRepositoryTest {
 
 	@Test(expected= JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_title_is_null() {
-		service.addEntry(new JacketEntry("url", null));
+		service.addEntry(new JacketEntry("url", null, new BufferedImage(0,0,0)));
 	}
 
 	@Test(expected= JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_url_is_null() {
-		service.addEntry(new JacketEntry(null, "title"));
+		service.addEntry(new JacketEntry(null, "title", new BufferedImage(0,0,0)));
+	}
+
+	@Test(expected= JacketServiceException.class)
+	public void addEntry_should_throw_an_exception_when_image_is_null() {
+		service.addEntry(new JacketEntry("url", "title", null));
 	}
 
 	@Test(expected= JacketServiceException.class)

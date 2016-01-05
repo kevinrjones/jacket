@@ -2,6 +2,11 @@ package com.pluralsight.jacket.entry.service;
 
 public class JacketServiceException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -45039187260255302L;
+
 	public JacketServiceException() {
 		super();
 	}
