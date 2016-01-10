@@ -39,12 +39,12 @@ public class Capture {
 	}
 	
 	@Test
+	@Ignore
 	public void should_retrieve_an_web_image_from_the_service() throws ClientProtocolException, IOException {
-		String access_key = "c53dbd893386fecfed94ec888367fc03";
+		String access_key = ""; // load from local
 		String snapshotUrl = "http://www.bbc.co.uk/sport/beta";
 		String url = "http://api.screenshotlayer.com/api/capture?access_key=" + access_key + "&url=" + snapshotUrl + "&width=350";
 		
-		//http://api.screenshotlayer.com/api/capture?access_key=c53dbd893386fecfed94ec888367fc03&url=http://apple.com&viewport=1440x900&fullpage=1
 		Image img = capture.getImage(url);                
 		assertThat(img).isNotNull();
 	}
