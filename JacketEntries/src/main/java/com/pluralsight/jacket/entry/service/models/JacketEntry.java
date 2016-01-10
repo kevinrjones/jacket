@@ -29,6 +29,7 @@ public class JacketEntry {
         tags = new ArrayList<String>();
         this.isArchived = false;
         this.isFavourite = false;
+        this.image = image;
     }
 
     public String getUrl() {
@@ -65,11 +66,11 @@ public class JacketEntry {
 		return "JacketEntry [url=" + url + ", title=" + title + "]";
 	}
 
-	Image getImage() {
+	public Image getImage() {
 		return image;
 	}
 
-	void setImage(Image image) {
+	public void setImage(Image image) {
 		this.image = image;
 	}
 

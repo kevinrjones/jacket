@@ -3,6 +3,7 @@ package com.pluralsight.jacket.entry.data.models;
 import java.sql.Blob;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.pluralsight.jacket.data.models.BaseModel;
@@ -13,7 +14,8 @@ public class Entry extends BaseModel {
 
 	private String url;
 	private String title;
-	private Blob image;
+	@Lob
+	private byte[] image;
 	
 	public String getUrl() {
 		return url;
@@ -27,10 +29,10 @@ public class Entry extends BaseModel {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Blob getImage() {
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(Blob image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 	

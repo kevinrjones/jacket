@@ -26,6 +26,7 @@ public class Capture implements ICapture {
 	 */
 	@Override
 	public Image getImage(String url) throws ClientProtocolException, IOException {
+		
 		if(url == null || url.isEmpty())
 		{
 			throw new IllegalArgumentException("url");
@@ -33,8 +34,14 @@ public class Capture implements ICapture {
         HttpGet httpget = new HttpGet(url);
         HttpResponse response = httpClient.execute(httpget);
         HttpEntity entity = response.getEntity();
-        BufferedInputStream bis = new BufferedInputStream(entity.getContent());
-	
-        return ImageIO.read(bis);
+        
+        if(response.getFirstHeader("Content-Type").getValue().startsWith("image")) {
+            BufferedInputStream bis = new BufferedInputStream(entity.getContent());
+        	
+            return ImageIO.read(bis);        
+        } else {
+        	throw new CaptureException();
+        }
+        
 	}
 }

@@ -33,20 +33,52 @@ public class EntryServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void getEntry_should_get_the_entrys_correct_title_and_url() {
+	public void getEntry_should_get_the_entrys_correct_title_and_url_and_image() {
 
 		JacketEntry entry = service.getEntry(1L);
 
 		assertThat(entry.getUrl()).isEqualTo("http://news.bbc.co.uk");
 		assertThat(entry.getTitle()).isEqualTo("News");
+		assertThat(entry.getImage()).isNotNull();
 	}
 
 	@Test
-	public void getAllEntries_should_get_all_entries() {
+	public void getAllEntries_should_get_all_entries_from_datastore() {
 
 		List<JacketEntry> entry = service.getAllEntries();
 
 		assertThat(entry.size()).isEqualTo(2);
+	}
+
+	@Test
+	public void addEntry_should_insert_a_valid_entry_into_store() {
+
+		List<JacketEntry> entries = service.getAllEntries();
+
+		assertThat(entries.size()).isEqualTo(2);
+
+		service.addEntry(new JacketEntry("title", "url", createImage()));
+
+		entries = service.getAllEntries();
+		assertThat(entries.size()).isEqualTo(3);
+	}
+
+	@Test
+	public void addEntry_added_entry_should_have_a_valid_title() {
+
+		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
+
+		JacketEntry entry = service.getEntry(id);
+		assertThat(entry.getTitle()).isEqualTo("new title");
+	}
+
+	@Test
+	public void addEntry_added_entry_should_have_a_valid_url() {
+
+		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
+
+		JacketEntry entry = service.getEntry(id);
+		assertThat(entry.getUrl()).isEqualTo("new url");
 	}
 
 	private Image createImage() {
@@ -75,37 +107,6 @@ public class EntryServiceTest extends AbstractTest {
 		g2.drawImage(in, 0, 0, null);
 		g2.dispose();
 		return out;
-	}
-
-	@Test
-	public void addEntry_should_insert_a_valid_entry() {
-
-		List<JacketEntry> entries = service.getAllEntries();
-
-		assertThat(entries.size()).isEqualTo(2);
-
-		service.addEntry(new JacketEntry("title", "url", createImage()));
-
-		entries = service.getAllEntries();
-		assertThat(entries.size()).isEqualTo(3);
-	}
-
-	@Test
-	public void addEntry_added_entry_should_have_a_valid_title() {
-
-		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
-
-		JacketEntry entry = service.getEntry(id);
-		assertThat(entry.getTitle()).isEqualTo("new title");
-	}
-
-	@Test
-	public void addEntry_added_entry_should_have_a_valid_url() {
-
-		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
-
-		JacketEntry entry = service.getEntry(id);
-		assertThat(entry.getUrl()).isEqualTo("new url");
 	}
 
 }
