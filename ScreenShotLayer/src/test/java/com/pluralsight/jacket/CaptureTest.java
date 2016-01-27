@@ -18,6 +18,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -29,22 +30,23 @@ public class CaptureTest {
 
 	Capture capture;
 	HttpClient client;
-	HttpResponse response;
-	HttpEntity entity;
 
 	@Before
 	public void before() throws IOException {
 		client = mock(HttpClient.class);
-		response = mock(HttpResponse.class);
-		entity = mock(HttpEntity.class);
+		HttpResponse response = mock(HttpResponse.class);
+		HttpEntity entity = mock(HttpEntity.class);
 		capture = new Capture(client);
+		Header header = mock(Header.class);
 
 		BufferedImage img = createImage();
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write(img, "png", os);
 		InputStream stream = new ByteArrayInputStream(os.toByteArray());
 
+		when(header.getValue()).thenReturn("image/jpeg");
 		when(response.getEntity()).thenReturn(entity);
+		when(response.getFirstHeader("Content-Type")).thenReturn(header);
 		when(client.execute(anyObject())).thenReturn(response);
 		when(entity.getContent()).thenReturn(stream);
 	}
