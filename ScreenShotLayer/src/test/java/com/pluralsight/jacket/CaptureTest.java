@@ -28,7 +28,7 @@ import org.junit.Test;
 
 public class CaptureTest {
 
-	Capture capture;
+	ScreenshotLayerCapture capture;
 	HttpClient client;
 
 	@Before
@@ -36,7 +36,7 @@ public class CaptureTest {
 		client = mock(HttpClient.class);
 		HttpResponse response = mock(HttpResponse.class);
 		HttpEntity entity = mock(HttpEntity.class);
-		capture = new Capture(client);
+		capture = new ScreenshotLayerCapture(client);
 		Header header = mock(Header.class);
 
 		BufferedImage img = createImage();
