@@ -57,7 +57,7 @@ public class EntryServiceTest extends AbstractTest {
 
 		assertThat(entries.size()).isEqualTo(2);
 
-		service.addEntry(new JacketEntry("title", "url", createImage()));
+		service.addEntry(new JacketEntry(1, "title", "url", createImage()));
 
 		entries = service.getAllEntries();
 		assertThat(entries.size()).isEqualTo(3);
@@ -66,7 +66,7 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_title() {
 
-		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
+		long id = service.addEntry(new JacketEntry(1, "new url", "new title", createImage()));
 
 		JacketEntry entry = service.getEntry(id);
 		assertThat(entry.getTitle()).isEqualTo("new title");
@@ -75,7 +75,7 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_url() {
 
-		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
+		long id = service.addEntry(new JacketEntry(1, "new url", "new title", createImage()));
 
 		JacketEntry entry = service.getEntry(id);
 		assertThat(entry.getUrl()).isEqualTo("new url");

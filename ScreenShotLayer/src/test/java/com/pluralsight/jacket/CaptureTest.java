@@ -32,7 +32,7 @@ public class CaptureTest {
 	HttpClient client;
 
 	@Before
-	public void before() throws IOException {
+	public void before() throws IOException, ScreenshotException {
 		client = mock(HttpClient.class);
 		HttpResponse response = mock(HttpResponse.class);
 		HttpEntity entity = mock(HttpEntity.class);

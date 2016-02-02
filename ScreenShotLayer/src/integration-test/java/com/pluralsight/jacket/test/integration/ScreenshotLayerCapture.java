@@ -7,14 +7,11 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.ProxySelector;
-import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
@@ -22,11 +19,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.pluralsight.jacket.ScreenshotException;
+
 public class ScreenshotLayerCapture {
 	com.pluralsight.jacket.ScreenshotLayerCapture capture;
 
 	@Before
-	public void before() throws IOException {
+	public void before() throws IOException, ScreenshotException {
 
 		SystemDefaultRoutePlanner routePlanner = new SystemDefaultRoutePlanner(ProxySelector.getDefault());
 		CloseableHttpClient client = HttpClients.custom().setRoutePlanner(routePlanner).build();
@@ -35,7 +34,7 @@ public class ScreenshotLayerCapture {
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void should_retrieve_an_web_image_from_the_service() throws ClientProtocolException, IOException {
 		String url = "http://www.bbc.co.uk/sport/beta";
 

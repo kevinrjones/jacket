@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.pluralsight.jacket.security.data.models.User;
+import com.pluralsight.jacket.data.models.User;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 import com.pluralsight.jacket.security.service.models.AuthenticatedUser;
 import com.pluralsight.jacket.security.service.models.JacketUser;

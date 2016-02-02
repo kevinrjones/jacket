@@ -53,7 +53,8 @@ public class ApplicationConfiguration {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.entry" });
+//		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.entry", "com.pluralsight.jacket.data.models"  });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.data.models"  });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

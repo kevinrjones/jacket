@@ -1,12 +1,10 @@
-package com.pluralsight.jacket.entry.data.models;
-
-import java.sql.Blob;
+package com.pluralsight.jacket.data.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.pluralsight.jacket.data.models.BaseModel;
 
 @Entity
 @Table(name = "entries")
@@ -14,8 +12,15 @@ public class Entry extends BaseModel {
 
 	private String url;
 	private String title;
+	
 	@Lob
 	private byte[] image;
+	
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+	
 	
 	public String getUrl() {
 		return url;
@@ -35,6 +40,11 @@ public class Entry extends BaseModel {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
-	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+		
 }

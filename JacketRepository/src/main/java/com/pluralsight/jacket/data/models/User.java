@@ -1,31 +1,29 @@
-package com.pluralsight.jacket.security.data.models;
+package com.pluralsight.jacket.data.models;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.pluralsight.jacket.data.models.BaseModel;
 
 @Entity
 @Table(name = "Users")
 public class User extends BaseModel implements Serializable  {
 
-//    @NotEmpty(message = "First name is required.")
     private String firstName;
 
-//    @NotEmpty(message = "Last name is required.")
     private String lastName;
 
-//    @Email(message = "Please provide a valid email address.")
-//    @NotEmpty(message = "Email is required.")
     @Column(unique=true, nullable = false)
     private String email;
 
-//    @NotEmpty(message = "Password is required.")
     private String password;
 
+    @OneToMany(mappedBy="user")
+    private Set<Entry> entries;
+    
     public User() {}
 
     public User(User user) {
@@ -72,5 +70,13 @@ public class User extends BaseModel implements Serializable  {
         this.email = email;
     }
 
-    private static final long serialVersionUID = 2738859149330833739L;
+    public Set<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(Set<Entry> entries) {
+		this.entries = entries;
+	}
+
+	private static final long serialVersionUID = 2738859149330833739L;
 }

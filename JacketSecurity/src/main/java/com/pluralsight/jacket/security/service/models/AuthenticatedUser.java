@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.pluralsight.jacket.security.data.models.User;
+import com.pluralsight.jacket.data.models.User;
 
 public class AuthenticatedUser implements UserDetails {
 	private String email;

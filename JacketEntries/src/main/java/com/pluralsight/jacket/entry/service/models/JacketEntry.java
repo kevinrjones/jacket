@@ -4,11 +4,13 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pluralsight.jacket.data.models.BaseModel;
+
 /**
  * Created by kevin on 30/06/2015.
  */
 public class JacketEntry {
-
+	private long userId;
 	String url;
     String title;
     private Image image;
@@ -16,14 +18,8 @@ public class JacketEntry {
     boolean isArchived;
     boolean isFavourite;
 
-    public JacketEntry(String url, boolean isArchived, boolean isFavourite) {
-        this.url = url;
-        tags = new ArrayList<String>();
-        this.isArchived = isArchived;
-        this.isFavourite = isFavourite;
-    }
-
-    public JacketEntry(String url, String title, Image image) {
+    public JacketEntry(long userId, String url, String title, Image image) {
+    	this.setUserId(userId);
         this.url = url;
         this.title = title;
         tags = new ArrayList<String>();
@@ -72,6 +68,14 @@ public class JacketEntry {
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 }
