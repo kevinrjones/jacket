@@ -31,8 +31,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 	Log log;
 
 	@Inject
-	public EntryRepositoryEntryDetailsService(EntryRepository entryRepository, UsersRepository userRepository,
-			Log log) {
+	public EntryRepositoryEntryDetailsService(EntryRepository entryRepository, UsersRepository userRepository,	Log log) {
 		this.entryRepository = entryRepository;
 		this.userRepository = userRepository;
 		this.log = log;
@@ -83,8 +82,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		try {
 			ImageIO.write(bufferedImage, "png", baos);
 			imageData = baos.toByteArray();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 		return imageData;
@@ -112,7 +110,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		User user = userRepository.findOne(jacketEntry.getUserId());
 		Entry entry = new Entry();
 
-		entry.setUser(user);
+		entry.setUser(user);		
 		entry.setTitle(jacketEntry.getTitle());
 		entry.setUrl(jacketEntry.getUrl());
 		entry.setImage(getByteArrayFromImage(jacketEntry.getImage()));

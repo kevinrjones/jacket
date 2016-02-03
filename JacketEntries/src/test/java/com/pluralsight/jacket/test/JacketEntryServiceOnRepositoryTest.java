@@ -22,6 +22,7 @@ import com.pluralsight.jacket.entry.service.JacketServiceException;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 
+
 public class JacketEntryServiceOnRepositoryTest {
 	EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
 	EntryRepository entryRepository;
