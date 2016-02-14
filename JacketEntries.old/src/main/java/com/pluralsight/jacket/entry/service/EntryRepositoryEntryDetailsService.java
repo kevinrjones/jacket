@@ -16,34 +16,30 @@ import javax.inject.Named;
 import org.apache.commons.logging.Log;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pluralsight.jacket.data.models.Entry;
-import com.pluralsight.jacket.data.models.User;
+import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.models.JacketEntry;
-import com.pluralsight.jacket.security.repository.UsersRepository;
 
 @Named
 @Transactional(readOnly = true)
 public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 
-	EntryRepository entryRepository;
-	UsersRepository userRepository;
+	EntryRepository repository;
 	Log log;
 
 	@Inject
-	public EntryRepositoryEntryDetailsService(EntryRepository entryRepository, UsersRepository userRepository,	Log log) {
-		this.entryRepository = entryRepository;
-		this.userRepository = userRepository;
+	public EntryRepositoryEntryDetailsService(EntryRepository repository, Log log) {
+		this.repository = repository;
 		this.log = log;
 	}
 
 	@Override
 	public List<JacketEntry> getAllEntries() {
-		Iterable<Entry> entries = entryRepository.findAll();
+		Iterable<Entry> entries = repository.findAll();
 		List<JacketEntry> serviceEntries = new LinkedList<JacketEntry>();
 		if (entries != null) {
-			entries.forEach(e -> serviceEntries.add(
-					new JacketEntry(e.getUser().getId(), e.getUrl(), e.getTitle(), getImageFromEntryByteArray(e))));
+			entries.forEach(
+					e -> serviceEntries.add(new JacketEntry(e.getUrl(), e.getTitle(), getImageFromEntryByteArray(e))));
 		} else {
 			log.debug("*********** repository return null");
 		}
@@ -68,7 +64,7 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		return image;
 	}
 
-	private byte[] getByteArrayFromImage(Image image) {
+	private byte[] getByteArrayFromImage(Image image)  {
 
 		if (image == null)
 			throw new IllegalArgumentException();
@@ -76,13 +72,14 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null),
 				BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
+		
 		byte[] imageData = null;
-
+		
 		try {
 			ImageIO.write(bufferedImage, "png", baos);
 			imageData = baos.toByteArray();
-		} catch (IOException e) {			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return imageData;
@@ -107,27 +104,23 @@ public class EntryRepositoryEntryDetailsService implements JacketEntryService {
 		if (jacketEntry.getImage() == null)
 			throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
 
-		User user = userRepository.findOne(jacketEntry.getUserId());
 		Entry entry = new Entry();
-
-		entry.setUser(user);		
 		entry.setTitle(jacketEntry.getTitle());
 		entry.setUrl(jacketEntry.getUrl());
 		entry.setImage(getByteArrayFromImage(jacketEntry.getImage()));
 
-		entryRepository.save(entry);
+		repository.save(entry);
 		return entry.getId();
 	}
 
 	@Override
 	public JacketEntry getEntry(long id) {
-		Entry entry = entryRepository.findOne(id);
+		Entry entry = repository.findOne(id);
 
 		if (entry == null)
 			throw new JacketServiceException("Unable to find entry in repository for id " + id);
 
-		JacketEntry jacketEntry = new JacketEntry(entry.getUser().getId(), entry.getUrl(), entry.getTitle(),
-				getImageFromEntryByteArray(entry));
+		JacketEntry jacketEntry = new JacketEntry(entry.getUrl(), entry.getTitle(), getImageFromEntryByteArray(entry));
 
 		return jacketEntry;
 	}

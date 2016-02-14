@@ -25,6 +25,8 @@ allprojects {
   apply plugin: 'io.spring.dependency-management' 
   
   version = '0.1-SNAPSHOT'
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
   
   repositories {
     jcenter()
@@ -39,7 +41,7 @@ allprojects {
   
   dependencies {
     testCompile 'org.hamcrest:hamcrest-core:1.3'
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.+'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     testCompile 'org.mockito:mockito-core:1.9.5'
     testCompile 'commons-logging:commons-logging:1.2'
@@ -52,6 +54,9 @@ allprojects {
 }
 
 
+project(':Image') {
+}
+
 project(':JacketSecurity') {
     dependencies {
       compile project(':JacketRepository')
@@ -62,6 +67,7 @@ project(':JacketEntries') {
     dependencies {
       compile project(':JacketRepository')
       compile project(':JacketSecurity')
+      compile project(':Image')
     }
 }
 
@@ -69,6 +75,7 @@ project(':JacketWeb') {
     dependencies {
       compile project(':JacketSecurity')
       compile project(':JacketEntries')
+      compile project(':Image')
     }
 }
 

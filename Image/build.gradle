@@ -1,0 +1,13 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+apply plugin: 'spring-boot'
+
+bootRepackage {
+  enabled = false
+}
+
+

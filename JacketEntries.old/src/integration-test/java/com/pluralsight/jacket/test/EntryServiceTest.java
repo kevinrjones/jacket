@@ -14,8 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pluralsight.jacket.entry.repository.EntryRepository;
 import com.pluralsight.jacket.entry.service.JacketEntryService;
-import com.pluralsight.jacket.entry.service.models.AddJacketEntry;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
+import com.pluralsight.jacket.entry.service.models.JacketEntry;
 import com.pluralsight.repository.AbstractTest;
 
 public class EntryServiceTest extends AbstractTest {
@@ -28,7 +27,7 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void shouldFindEntryById() {
 
-		GetJacketEntry entry = service.getEntry(1L);
+		JacketEntry entry = service.getEntry(1L);
 
 		assertThat(entry).isNotNull();
 	}
@@ -36,17 +35,17 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void getEntry_should_get_the_entrys_correct_title_and_url_and_image() {
 
-		GetJacketEntry entry = service.getEntry(1L);
+		JacketEntry entry = service.getEntry(1L);
 
 		assertThat(entry.getUrl()).isEqualTo("http://news.bbc.co.uk");
 		assertThat(entry.getTitle()).isEqualTo("News");
-		//assertThat(entry.getImage()).isNotNull();
+		assertThat(entry.getImage()).isNotNull();
 	}
 
 	@Test
 	public void getAllEntries_should_get_all_entries_from_datastore() {
 
-		List<GetJacketEntry> entry = service.getAllEntries(1);
+		List<JacketEntry> entry = service.getAllEntries();
 
 		assertThat(entry.size()).isEqualTo(2);
 	}
@@ -54,35 +53,35 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void addEntry_should_insert_a_valid_entry_into_store() {
 
-		List<GetJacketEntry> entries = service.getAllEntries(1);
+		List<JacketEntry> entries = service.getAllEntries();
 
 		assertThat(entries.size()).isEqualTo(2);
 
-		service.addEntry(new AddJacketEntry(1L, "title", "url", 1L, createImage()));
+		service.addEntry(new JacketEntry("title", "url", createImage()));
 
-		entries = service.getAllEntries(1);
+		entries = service.getAllEntries();
 		assertThat(entries.size()).isEqualTo(3);
 	}
 
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_title() {
 
-		long id = service.addEntry(new AddJacketEntry(1L, "new url", "new title", 1L, createImage()));
+		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
 
-		GetJacketEntry entry = service.getEntry(id);
+		JacketEntry entry = service.getEntry(id);
 		assertThat(entry.getTitle()).isEqualTo("new title");
 	}
 
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_url() {
 
-		long id = service.addEntry(new AddJacketEntry(1L, "new url", "new title", 1L, createImage()));
+		long id = service.addEntry(new JacketEntry("new url", "new title", createImage()));
 
-		GetJacketEntry entry = service.getEntry(id);
+		JacketEntry entry = service.getEntry(id);
 		assertThat(entry.getUrl()).isEqualTo("new url");
 	}
 
-	private BufferedImage createImage() {
+	private Image createImage() {
 		int w = 100;
 		int h = 100;
 		int pix[] = new int[w * h];

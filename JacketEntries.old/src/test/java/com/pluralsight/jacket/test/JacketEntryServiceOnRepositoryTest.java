@@ -15,41 +15,34 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.pluralsight.jacket.data.models.Entry;
-import com.pluralsight.jacket.data.models.User;
+import com.pluralsight.jacket.entry.data.models.Entry;
 import com.pluralsight.jacket.entry.repository.EntryRepository;
-import com.pluralsight.jacket.entry.service.EntryDetailsServiceOnEntryRepository;
+import com.pluralsight.jacket.entry.service.EntryRepositoryEntryDetailsService;
 import com.pluralsight.jacket.entry.service.JacketServiceException;
-import com.pluralsight.jacket.entry.service.models.AddJacketEntry;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
-import com.pluralsight.jacket.security.repository.UsersRepository;
+import com.pluralsight.jacket.entry.service.models.JacketEntry;
 
 public class JacketEntryServiceOnRepositoryTest {
-	EntryDetailsServiceOnEntryRepository jacketEntryServiceOnRepository;
-	EntryRepository entryRepository;
-	UsersRepository usersRepository;
+	EntryRepositoryEntryDetailsService jacketEntryServiceOnRepository;
+	EntryRepository repository;
 	Log log;
-	EntryDetailsServiceOnEntryRepository service;
+	EntryRepositoryEntryDetailsService service;
 
 	@Before
 	public void before() {
-		entryRepository = mock(EntryRepository.class);
-		usersRepository = mock(UsersRepository.class);
+		repository = mock(EntryRepository.class);
 		log = mock(Log.class);
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
+		service = new EntryRepositoryEntryDetailsService(repository, log);
 	}
 
 	@Test
 	public void getAllEntries_should_return_all_entries() throws SerialException, SQLException {
 
-		User user = new User();
 		Entry entry = new Entry();
 		entry.setImage(new byte[0]);
-		entry.setUser(user);
+		
+		when(repository.findAll()).thenReturn(Arrays.asList(entry));
 
-		when(entryRepository.findByUserId(1)).thenReturn(Arrays.asList(entry));
-
-		List<GetJacketEntry> entries = service.getAllEntries(1);
+		List<JacketEntry> entries = service.getAllEntries();
 
 		assertThat(entries.size()).isEqualTo(1);
 	}
@@ -57,16 +50,14 @@ public class JacketEntryServiceOnRepositoryTest {
 	@Test
 	public void getEntry_should_return_a_single_entry() throws SerialException, SQLException {
 
-		Long id = 1L;
+		long id = 1;
 		Entry entryIn = new Entry();
-		User user = new User();
-		user.setId(1L);
-		entryIn.setUser(user);
-		entryIn.setImage(new byte[0]);
-		when(entryRepository.findOne(id)).thenReturn(entryIn);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
-		GetJacketEntry entry = service.getEntry(id);
+		entryIn.setImage(new byte[0]);
+		when(repository.findOne(id)).thenReturn(entryIn);
+
+		service = new EntryRepositoryEntryDetailsService(repository, log);
+		JacketEntry entry = service.getEntry(id);
 
 		assertThat(entry).isNotNull();
 	}
@@ -75,33 +66,29 @@ public class JacketEntryServiceOnRepositoryTest {
 	public void getEntry_should_throw_an_exception_when_the_id_is_wrong() {
 
 		long id = 1;
-		when(entryRepository.findOne(id)).thenReturn(null);
+		when(repository.findOne(id)).thenReturn(null);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
+		service = new EntryRepositoryEntryDetailsService(repository, log);
 		service.getEntry(id);
 	}
 
 	@Test
-	public void getEntry_should_return_a_single_entry_with_the_correct_title_and_url()
-			throws SerialException, SQLException {
+	public void getEntry_should_return_a_single_entry_with_the_correct_title_and_url() throws SerialException, SQLException {
 
 		long id = 1;
 		String title = "Title";
 		String url = "URL";
 
 		Entry entry = new Entry();
-		User user = new User();
-		user.setId(1L);
-		entry.setUser(user);
 		entry.setTitle(title);
 		entry.setUrl(url);
 
 		entry.setImage(new byte[0]);
 
-		when(entryRepository.findOne(id)).thenReturn(entry);
+		when(repository.findOne(id)).thenReturn(entry);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
-		GetJacketEntry jacketEntry = service.getEntry(id);
+		service = new EntryRepositoryEntryDetailsService(repository, log);
+		JacketEntry jacketEntry = service.getEntry(id);
 
 		assertThat(jacketEntry.getTitle()).isEqualTo(title);
 		assertThat(jacketEntry.getUrl()).isEqualTo(url);
@@ -109,21 +96,22 @@ public class JacketEntryServiceOnRepositoryTest {
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_title_is_null() {
-		service.addEntry(new AddJacketEntry(1L, "url", null, 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
+		service.addEntry(new JacketEntry("url", null, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
 	}
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_url_is_null() {
-		service.addEntry(new AddJacketEntry(1L, null, "title", 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
+		service.addEntry(new JacketEntry(null, "title", new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
 	}
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_image_is_null() {
-		service.addEntry(new AddJacketEntry(1L, "url", "title", 1L, null));
+		service.addEntry(new JacketEntry("url", "title", null));
 	}
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_entry_is_null() {
 		service.addEntry(null);
 	}
+
 }

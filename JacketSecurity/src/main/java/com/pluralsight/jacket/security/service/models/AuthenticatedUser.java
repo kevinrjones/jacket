@@ -12,11 +12,13 @@ public class AuthenticatedUser implements UserDetails {
 	private String email;
 	private String password;
 	private String name;
+	private long id;
 
 	public AuthenticatedUser(User user){
 		email = user.getEmail();
 		name = user.getFirstName() + " " + user.getLastName();
 		password = user.getPassword();
+		id = user.getId();
 	}
 	
 	public String getName() {
@@ -62,6 +64,14 @@ public class AuthenticatedUser implements UserDetails {
 	@Override
 	public String getPassword() {
 		return password;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

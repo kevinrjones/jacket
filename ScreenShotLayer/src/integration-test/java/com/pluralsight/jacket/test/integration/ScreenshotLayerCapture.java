@@ -41,6 +41,8 @@ public class ScreenshotLayerCapture {
 		Image img = capture.getImage(url);
 		assertThat(img).isNotNull();
 		File f = File.createTempFile("bbc", ".png");
+
+		System.err.println(f.getAbsolutePath());
 		
 		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
