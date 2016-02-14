@@ -34,13 +34,13 @@ public class ScreenshotLayerCapture {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void should_retrieve_an_web_image_from_the_service() throws ClientProtocolException, IOException {
-		String url = "http://www.bbc.co.uk/sport/beta";
+		String url = "http://stackoverflow.com/";
 
 		Image img = capture.getImage(url);
 		assertThat(img).isNotNull();
-		File f = File.createTempFile("bbc", ".png");
+		File f = File.createTempFile("stackoverflow", ".png");
 
 		System.err.println(f.getAbsolutePath());
 		

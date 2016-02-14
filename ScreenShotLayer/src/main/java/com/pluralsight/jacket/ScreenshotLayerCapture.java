@@ -50,7 +50,7 @@ public class ScreenshotLayerCapture implements Capture {
 			throw new IllegalArgumentException("url");
 		}
 
-		String captureUrl = baseUrl + "?access_key=" + access_key + "&url=" + url + "&width=350";
+		String captureUrl = baseUrl + "?access_key=" + access_key + "&url=" + url + "&width=270";
 
 		System.err.println(captureUrl);
 
