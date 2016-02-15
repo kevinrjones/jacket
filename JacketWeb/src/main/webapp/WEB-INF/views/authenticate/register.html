@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/layout">
+	layout:decorator="layout/user">
 <head>
 <title>Login</title>
 </head>
@@ -9,6 +9,7 @@
 	<div layout:fragment="content">
 		<form th:action="@{/account/register}" method="post" th:object="${registrationUser}">
 			<div class="loginmodal-container">
+				<h1  th:text="#{registerYourAccount}">Register Your Account</h1>						 
 				<input type="text" id="email" name="email" th:placeholder="#{email}" th:field="*{email}" th:errorclass="field-error"/>
 				<div class="error-container has-error"> 
 					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message help-block">Incorrect email</span>
