@@ -14,33 +14,33 @@ import static com.pluralsight.image.ImageConverter.getByteArrayFromImage;
 import static com.pluralsight.image.ImageConverter.getImageFromByteArray;
 import com.pluralsight.jacket.data.models.Entry;
 import com.pluralsight.jacket.data.models.User;
-import com.pluralsight.jacket.entry.repository.EntryRepository;
-import com.pluralsight.jacket.entry.service.models.AddJacketEntry;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
+import com.pluralsight.jacket.entry.repository.ArticleRepository;
+import com.pluralsight.jacket.entry.service.models.AddJacketArticle;
+import com.pluralsight.jacket.entry.service.models.GetJacketArticle;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 
 @Named
 @Transactional(readOnly = true)
-public class EntryDetailsServiceOnEntryRepository implements JacketEntryService {
+public class ArticleDetailsServiceOnArticleRepository implements JacketArticleService {
 
-	EntryRepository entryRepository;
+	ArticleRepository entryRepository;
 	UsersRepository userRepository;
 	Log log;
 
 	@Inject
-	public EntryDetailsServiceOnEntryRepository(EntryRepository entryRepository, UsersRepository userRepository,	Log log) {
+	public ArticleDetailsServiceOnArticleRepository(ArticleRepository entryRepository, UsersRepository userRepository,	Log log) {
 		this.entryRepository = entryRepository;
 		this.userRepository = userRepository;
 		this.log = log;
 	}
 
 	@Override
-	public List<GetJacketEntry> getAllEntries(long id) {
+	public List<GetJacketArticle> getAllEntries(long id) {
 		Iterable<Entry> entries = entryRepository.findByUserId(id);
-		List<GetJacketEntry> serviceEntries = new LinkedList<GetJacketEntry>();
+		List<GetJacketArticle> serviceEntries = new LinkedList<GetJacketArticle>();
 		if (entries != null) {
 			entries.forEach(e -> serviceEntries.add(
-					new GetJacketEntry(e.getUser().getId(), e.getUrl(), e.getTitle(), e.getId()/*, getImageFromEntryByteArray(e)*/)));
+					new GetJacketArticle(e.getUser().getId(), e.getUrl(), e.getTitle(), e.getId()/*, getImageFromEntryByteArray(e)*/)));
 		} else {
 			log.debug("*********** repository return null");
 		}
@@ -50,13 +50,13 @@ public class EntryDetailsServiceOnEntryRepository implements JacketEntryService 
 
 	@Override
 	@Transactional(readOnly = false)
-	public void updateEntry(AddJacketEntry jacketEntry) {
+	public void updateEntry(AddJacketArticle jacketEntry) {
 
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public long addEntry(AddJacketEntry jacketEntry) {
+	public long addEntry(AddJacketArticle jacketEntry) {
 
 		if (jacketEntry == null)
 			throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
@@ -80,7 +80,7 @@ public class EntryDetailsServiceOnEntryRepository implements JacketEntryService 
 	}
 
 	@Override
-	public GetJacketEntry getEntry(long id) {
+	public GetJacketArticle getEntry(long id) {
 		Entry entry = entryRepository.findOne(id);
 
 		if (entry == null)
@@ -90,7 +90,7 @@ public class EntryDetailsServiceOnEntryRepository implements JacketEntryService 
 		String title = entry.getTitle();
 		Long entryid = entry.getId();
 		
-		GetJacketEntry jacketEntry = new GetJacketEntry(userId, url, title, entryid);
+		GetJacketArticle jacketEntry = new GetJacketArticle(userId, url, title, entryid);
 
 		return jacketEntry;
 	}

@@ -1,27 +1,30 @@
 package com.pluralsight.jacket.entry.service.models;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetJacketEntry {
+/**
+ * Created by kevin on 30/06/2015.
+ */
+public class AddJacketArticle {
 	private Long userId;
 	private String url;
 	private String title;
 	private Long entryId;
-	private Image image;
+	private BufferedImage image;
 	private List<String> tags;
 	boolean isArchived;
 	boolean isFavourite;
 
-	public GetJacketEntry(Long userId, String url, String title, Long entryId) {
+	public AddJacketArticle(Long userId, String url, String title, Long entryId, BufferedImage image) {
 		this.setUserId(userId);
 		this.url = url;
 		this.title = title;
 		tags = new ArrayList<String>();
 		this.isArchived = false;
 		this.isFavourite = false;
-		this.setEntryId(entryId);
+		this.setImage(image);
 	}
 
 	public String getUrl() {
@@ -75,12 +78,13 @@ public class GetJacketEntry {
 		this.entryId = entryId;
 	}
 
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
 
 }
+

@@ -17,26 +17,26 @@ import org.junit.Test;
 
 import com.pluralsight.jacket.data.models.Entry;
 import com.pluralsight.jacket.data.models.User;
-import com.pluralsight.jacket.entry.repository.EntryRepository;
-import com.pluralsight.jacket.entry.service.EntryDetailsServiceOnEntryRepository;
+import com.pluralsight.jacket.entry.repository.ArticleRepository;
+import com.pluralsight.jacket.entry.service.ArticleDetailsServiceOnArticleRepository;
 import com.pluralsight.jacket.entry.service.JacketServiceException;
-import com.pluralsight.jacket.entry.service.models.AddJacketEntry;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
+import com.pluralsight.jacket.entry.service.models.AddJacketArticle;
+import com.pluralsight.jacket.entry.service.models.GetJacketArticle;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 
 public class JacketEntryServiceOnRepositoryTest {
-	EntryDetailsServiceOnEntryRepository jacketEntryServiceOnRepository;
-	EntryRepository entryRepository;
+	ArticleDetailsServiceOnArticleRepository jacketEntryServiceOnRepository;
+	ArticleRepository entryRepository;
 	UsersRepository usersRepository;
 	Log log;
-	EntryDetailsServiceOnEntryRepository service;
+	ArticleDetailsServiceOnArticleRepository service;
 
 	@Before
 	public void before() {
-		entryRepository = mock(EntryRepository.class);
+		entryRepository = mock(ArticleRepository.class);
 		usersRepository = mock(UsersRepository.class);
 		log = mock(Log.class);
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
+		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class JacketEntryServiceOnRepositoryTest {
 
 		when(entryRepository.findByUserId(1)).thenReturn(Arrays.asList(entry));
 
-		List<GetJacketEntry> entries = service.getAllEntries(1);
+		List<GetJacketArticle> entries = service.getAllEntries(1);
 
 		assertThat(entries.size()).isEqualTo(1);
 	}
@@ -65,8 +65,8 @@ public class JacketEntryServiceOnRepositoryTest {
 		entryIn.setImage(new byte[0]);
 		when(entryRepository.findOne(id)).thenReturn(entryIn);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
-		GetJacketEntry entry = service.getEntry(id);
+		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
+		GetJacketArticle entry = service.getEntry(id);
 
 		assertThat(entry).isNotNull();
 	}
@@ -77,7 +77,7 @@ public class JacketEntryServiceOnRepositoryTest {
 		long id = 1;
 		when(entryRepository.findOne(id)).thenReturn(null);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
+		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
 		service.getEntry(id);
 	}
 
@@ -100,8 +100,8 @@ public class JacketEntryServiceOnRepositoryTest {
 
 		when(entryRepository.findOne(id)).thenReturn(entry);
 
-		service = new EntryDetailsServiceOnEntryRepository(entryRepository, usersRepository, log);
-		GetJacketEntry jacketEntry = service.getEntry(id);
+		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
+		GetJacketArticle jacketEntry = service.getEntry(id);
 
 		assertThat(jacketEntry.getTitle()).isEqualTo(title);
 		assertThat(jacketEntry.getUrl()).isEqualTo(url);
@@ -109,17 +109,17 @@ public class JacketEntryServiceOnRepositoryTest {
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_title_is_null() {
-		service.addEntry(new AddJacketEntry(1L, "url", null, 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
+		service.addEntry(new AddJacketArticle(1L, "url", null, 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
 	}
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_url_is_null() {
-		service.addEntry(new AddJacketEntry(1L, null, "title", 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
+		service.addEntry(new AddJacketArticle(1L, null, "title", 1L, new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB)));
 	}
 
 	@Test(expected = JacketServiceException.class)
 	public void addEntry_should_throw_an_exception_when_image_is_null() {
-		service.addEntry(new AddJacketEntry(1L, "url", "title", 1L, null));
+		service.addEntry(new AddJacketArticle(1L, "url", "title", 1L, null));
 	}
 
 	@Test(expected = JacketServiceException.class)

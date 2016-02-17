@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import static com.pluralsight.image.ImageConverter.getByteArrayFromImage;
-import com.pluralsight.jacket.entry.service.JacketEntryService;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
+import com.pluralsight.jacket.entry.service.JacketArticleService;
+import com.pluralsight.jacket.entry.service.models.GetJacketArticle;
 import com.pluralsight.jacket.security.service.models.AuthenticatedUser;
 import com.pluralsight.jacketweb.viewmodels.Entry;
 import com.pluralsight.security.CurrentUser;
@@ -28,18 +28,18 @@ import com.pluralsight.security.CurrentUser;
 @RequestMapping(value = { "/", "/link" })
 public class ArticleController {
 
-	private JacketEntryService service;
+	private JacketArticleService service;
 	private Log log;
 
 	@Inject
-	public ArticleController(JacketEntryService service, Log log) {
+	public ArticleController(JacketArticleService service, Log log) {
 		this.service = service;
 		this.log = log;
 	}
 
 	@RequestMapping(value = { "/", "" })
 	public ModelAndView index(@CurrentUser AuthenticatedUser user) {
-		List<GetJacketEntry> serviceEntries = service.getAllEntries(user.getId());
+		List<GetJacketArticle> serviceEntries = service.getAllEntries(user.getId());
 		List<Entry> entries = new ArrayList<Entry>();
 		serviceEntries.forEach(e -> {
 			Entry entry = new Entry(e);

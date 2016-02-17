@@ -12,23 +12,23 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.pluralsight.jacket.entry.repository.EntryRepository;
-import com.pluralsight.jacket.entry.service.JacketEntryService;
-import com.pluralsight.jacket.entry.service.models.AddJacketEntry;
-import com.pluralsight.jacket.entry.service.models.GetJacketEntry;
+import com.pluralsight.jacket.entry.repository.ArticleRepository;
+import com.pluralsight.jacket.entry.service.JacketArticleService;
+import com.pluralsight.jacket.entry.service.models.AddJacketArticle;
+import com.pluralsight.jacket.entry.service.models.GetJacketArticle;
 import com.pluralsight.repository.AbstractTest;
 
 public class EntryServiceTest extends AbstractTest {
 
 	@Autowired
-	EntryRepository repository;
+	ArticleRepository repository;
 	@Autowired
-	JacketEntryService service;
+	JacketArticleService service;
 
 	@Test
 	public void shouldFindEntryById() {
 
-		GetJacketEntry entry = service.getEntry(1L);
+		GetJacketArticle entry = service.getEntry(1L);
 
 		assertThat(entry).isNotNull();
 	}
@@ -36,7 +36,7 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void getEntry_should_get_the_entrys_correct_title_and_url_and_image() {
 
-		GetJacketEntry entry = service.getEntry(1L);
+		GetJacketArticle entry = service.getEntry(1L);
 
 		assertThat(entry.getUrl()).isEqualTo("http://news.bbc.co.uk");
 		assertThat(entry.getTitle()).isEqualTo("News");
@@ -46,7 +46,7 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void getAllEntries_should_get_all_entries_from_datastore() {
 
-		List<GetJacketEntry> entry = service.getAllEntries(1);
+		List<GetJacketArticle> entry = service.getAllEntries(1);
 
 		assertThat(entry.size()).isEqualTo(2);
 	}
@@ -54,11 +54,11 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void addEntry_should_insert_a_valid_entry_into_store() {
 
-		List<GetJacketEntry> entries = service.getAllEntries(1);
+		List<GetJacketArticle> entries = service.getAllEntries(1);
 
 		assertThat(entries.size()).isEqualTo(2);
 
-		service.addEntry(new AddJacketEntry(1L, "title", "url", 1L, createImage()));
+		service.addEntry(new AddJacketArticle(1L, "title", "url", 1L, createImage()));
 
 		entries = service.getAllEntries(1);
 		assertThat(entries.size()).isEqualTo(3);
@@ -67,18 +67,18 @@ public class EntryServiceTest extends AbstractTest {
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_title() {
 
-		long id = service.addEntry(new AddJacketEntry(1L, "new url", "new title", 1L, createImage()));
+		long id = service.addEntry(new AddJacketArticle(1L, "new url", "new title", 1L, createImage()));
 
-		GetJacketEntry entry = service.getEntry(id);
+		GetJacketArticle entry = service.getEntry(id);
 		assertThat(entry.getTitle()).isEqualTo("new title");
 	}
 
 	@Test
 	public void addEntry_added_entry_should_have_a_valid_url() {
 
-		long id = service.addEntry(new AddJacketEntry(1L, "new url", "new title", 1L, createImage()));
+		long id = service.addEntry(new AddJacketArticle(1L, "new url", "new title", 1L, createImage()));
 
-		GetJacketEntry entry = service.getEntry(id);
+		GetJacketArticle entry = service.getEntry(id);
 		assertThat(entry.getUrl()).isEqualTo("new url");
 	}
 
