@@ -26,13 +26,13 @@ import com.pluralsight.security.CurrentUser;
 
 @Controller
 @RequestMapping(value = { "/", "/link" })
-public class LinkController {
+public class ArticleController {
 
 	private JacketEntryService service;
 	private Log log;
 
 	@Inject
-	public LinkController(JacketEntryService service, Log log) {
+	public ArticleController(JacketEntryService service, Log log) {
 		this.service = service;
 		this.log = log;
 	}

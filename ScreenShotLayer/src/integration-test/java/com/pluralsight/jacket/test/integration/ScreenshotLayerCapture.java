@@ -34,7 +34,7 @@ public class ScreenshotLayerCapture {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void should_retrieve_an_web_image_from_the_service() throws ClientProtocolException, IOException {
 		String url = "http://stackoverflow.com/";
 
