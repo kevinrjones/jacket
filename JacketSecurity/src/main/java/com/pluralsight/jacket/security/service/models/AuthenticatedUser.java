@@ -9,34 +9,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.pluralsight.jacket.data.models.User;
 
 public class AuthenticatedUser implements UserDetails {
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
-	private String name;
 	private long id;
 
 	public AuthenticatedUser(User user){
+		firstName = user.getFirstName();
+		lastName = user.getLastName();
 		email = user.getEmail();
-		name = user.getFirstName() + " " + user.getLastName();
 		password = user.getPassword();
 		id = user.getId();
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return AuthorityUtils.createAuthorityList("ROLE_USER");
-	}
-
-	@Override
-	public String getUsername() {
-		return getEmail();
 	}
 
 	@Override
@@ -70,8 +59,25 @@ public class AuthenticatedUser implements UserDetails {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public String getFirstName() {
+		return firstName;
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
+
+	@Override
+	public String getUsername() {
+		return getEmail();
+	}
+
+	public String getName() {
+		return getFirstName() + " " + getLastName();
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	
 }

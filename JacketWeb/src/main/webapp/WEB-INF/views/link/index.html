@@ -41,8 +41,8 @@
 											href="#">My List</a></li>
 										<li class="popover-new-listitem favorites" val="favorites"><a
 											href="#">Favorites</a></li>
-										<li class="popover-new-listitem archive last" val="archive"><a
-											href="#">Archive</a></li>
+<!-- 										<li class="popover-new-listitem archive last" val="archive"><a
+											href="#">Archive</a></li> -->
 									</ul>
 								</div>
 							</div></a>
@@ -56,26 +56,39 @@
 					</a></li>
 				</ul>
 				<ul class="icons rightItem">
-					<li id="pagenav_searchicon" class="pagenav_searchicon"><a
-						class="hint-item" title="Search" data-intro="Search"
-						data-position="bottom" href="#">Search</a></li>
-					<li id="pagenav_addarticle"><a class="hint-item"
-						data-intro="Save a URL" data-position="bottomlower"
-						title="Save a URL" href="#">Save a URL</a></li>
-					<li id="pagenav_inbox"><span class="inbox_badge"></span> <a
-						class="hint-item pagenav_inbox_link" data-intro="View Inbox"
-						data-position="bottom" title="View Inbox" href="#">View Inbox</a>
-					</li>
+					<!-- <li id="pagenav_searchicon" class="pagenav_searchicon"><a
+						id="nav_search" role="button" class="btn btn-default"
+						aria-label="Left Align" data-toggle="popover"
+						data-placement="bottom" tabindex='1'> <span
+							class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a></li> -->
+					<li id="pagenav_addarticle"><a id="nav_add" role="button"
+						class="btn btn-default" aria-label="Left Align"
+						data-toggle="popover" data-placement="bottom" tabindex='1'> <span
+							class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</a></li>
+					<li id="pagenav_inbox"></li>
 					<li id="pagenav_optionsdivider" class="pagenav_optionsdivider">
 						<a href="#"></a>
 					</li>
 					<li id="pagenav_options"><a class="pagenav_options_link"
 						title="" href="#"> <span class="nav-avatar"
 							style="background-image: url(https://img.readitlater.com/i/lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo/RS/w80-h80.jpg?&amp;amp;ssl=1);"></span>
-							<span class="nav-username">Kevin</span> <span
+							<span class="nav-username" th:text="${currentUser?.name}">Bob</span>
+							<!-- <span class="nav-username">Kevin</span> --> <span
 							class="nav-downnotch"></span>
 					</a>
 						<div id="pagenav_options_container" class="dropSelector" style="">
+							<!--
+							<div class="nav navbar-left" th:if="${currentUser !=null}">
+								<form class="navbar-form" th:action="@{/account/logout}"
+									method="post">
+									<div class="input-group">
+										<button type="submit" class="button btn-link" th:text="#{logout}">Log Out</button>
+									</div>
+								</form>
+							</div>
+						 -->
 							<a></a>
 							<div class="popover-new popover-new-bottomleft">
 								<div class="popover-new-header">
@@ -162,7 +175,7 @@
 						<div class="search-input-wrapper">
 							<ul class="search-input-list">
 								<li class="search-input"><input id="page_search"
-									type="text" placeholder="Search" maxlength="100"/></li>
+									type="text" placeholder="Search" maxlength="100" /></li>
 							</ul>
 						</div>
 						<ul class="search-instr-recent">
@@ -201,9 +214,9 @@
 								class="nav-icon"></span>Archive</a></li>
 						<li class="nav-default-divider"></li>
 						<li><a class="nav-sublist filter-articles" href="#"><span>Articles</span></a></li>
-						<li><a class="nav-sublist filter-videos" href="#"><span>Videos</span></a></li>
-						<li><a class="nav-sublist filter-images" href="#"><span>Images</span></a></li>
-						<li><a class="filter-tags" href="#"><span
+<!-- 						<li><a class="nav-sublist filter-videos" href="#"><span>Videos</span></a></li>
+						<li><a class="nav-sublist filter-images" href="#"><span>Images</span></a></li> -->
+ 						<li><a class="filter-tags" href="#"><span
 								class="nav-icon"></span>Tags <span class="nav-rarrow">›</span></a></li>
 						<li><a class="section-inbox" href="#"><span
 								class="nav-icon"></span> <span class="inbox_badge"></span> Inbox</a></li>
@@ -317,6 +330,25 @@
 		<footer>
 			<div class="wrapper wrapper_full"></div>
 		</footer>
+
+		<div id='popover_container'>
+			<div id="nav_search_title" style='display: none'>Save an item
+				to Jacket</div>
+			<div id="nav_search_content" style='display: none'>
+				<div class="container" id='nav_search_content_container'>
+					<input type="text" placeholder="http://..." /><a href="#"
+						class="button button-disabled">Save</a>
+				</div>
+			</div>
+			<div id="nav_add_title" style='display: none'>Save an item to
+				Jacket</div>
+			<div id="nav_add_content" style='display: none'>
+				<div class="container" id='nav_add_content_container'>
+					<input type="text" placeholder="http://..." /><a href="#"
+						class="button button-disabled">Save</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

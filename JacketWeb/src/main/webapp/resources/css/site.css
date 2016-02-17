@@ -1122,7 +1122,7 @@ blockquote, blockquote p {
 }
 .pkt-nav li a {
 	display: block;
-	text-indent: -789em
+	/* text-indent: -789em */
 }
 #page .pkt-nav .wrapper {
 	display: none
@@ -5631,7 +5631,7 @@ blockquote, blockquote p {
 }
 @media only screen and (min-width:30em) {
 	#addMenu {
-		width: 358px
+		width: 360px
 	}
 }
 .addmenu-hideconnect .container p {
@@ -5661,12 +5661,30 @@ blockquote, blockquote p {
 	top: 1px;
 	width: 100%
 }
+.popover-content .container input {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	color: #666;
+	display: block;
+	font-size: 15px;
+	padding: 5px 10px;
+	position: relative;
+	top: 1px;
+	width: 100%
+}
 @media only screen and (min-width:30em) {
 	#addMenu .container input {
 		box-sizing: content-box;
 		display: inline-block;
 		margin: 0 10px 18px;
 		width: 240px
+	}
+	.popover-content .container input {
+	   box-sizing: content-box;
+	   display: inline-block;
+	   margin: 0 10px 18px;
+	   width: 240px;
 	}
 }
 #addMenu .addurl_mobile_mode input {
@@ -5685,13 +5703,27 @@ blockquote, blockquote p {
 	position: relative;
 	top: 1px
 }
+.popover-content .container .button {
+	display: block;
+	font-size: 15px;
+	margin-top: 20px;
+	padding: 7px 15px;
+	position: relative;
+	top: 1px
+}
 @media only screen and (min-width:30em) {
 	#addMenu .container .button {
 		display: inline-block;
 		margin-right: 10px;
 		margin-top: 0
 	}
+	.popover-content .container .button {
+	    display: inline-block;
+	    margin-right: 10px;
+	    margin-top: 0;
+	}
 }
+
 #addMenu .container h5 {
 	color: #313131;
 	display: none;
@@ -6800,7 +6832,6 @@ blockquote, blockquote p {
 	overflow: hidden;
 	outline: 0;
 	position: relative;
-	text-indent: -9999px;
 	width: 15px
 }
 @media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dpi) {
@@ -7268,8 +7299,7 @@ blockquote, blockquote p {
 	height: 15px;
 	margin-top: 1.42em;
 	overflow: hidden;
-	outline: 0;
-	text-indent: -9999px;
+	outline: 0;	
 	width: 15px
 }
 @media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dpi) {
@@ -12655,4 +12685,29 @@ blockquote, blockquote p {
 			background-size: 95px 88px
 		}
 	}
+}
+
+.btn-default {
+  background-color: #f4f4f6 !important;
+}
+
+.icons .btn {
+  margin-left: 22px;
+}
+
+.popover {
+  max-width: 1000px;
+  z-index: 9999; 
+}
+
+#nav_search_content_container {
+  width: 370px;
+}
+
+.btn-default {
+     border-color: transparent; 
+}
+
+.pkt-nav .rightItem a {
+    margin-left: 5px;
 }
