@@ -63,7 +63,7 @@ project(':JacketSecurity') {
     }
 }
 
-project(':JacketEntries') {
+project(':JacketArticles') {
     dependencies {
       compile project(':JacketRepository')
       compile project(':JacketSecurity')
@@ -74,7 +74,7 @@ project(':JacketEntries') {
 project(':JacketWeb') {
     dependencies {
       compile project(':JacketSecurity')
-      compile project(':JacketEntries')
+      compile project(':JacketArticles')
       compile project(':Image')
     }
 }
@@ -94,7 +94,7 @@ if(project.hasProperty('jacket_password')) {
     mysqlPassword = System.getenv("jacket_password") 
 }
 
-[ "JacketRepository", "JacketWeb", "JacketSecurity", "JacketEntries"].each { name ->
+[ "JacketRepository", "JacketWeb", "JacketSecurity", "JacketArticles"].each { name ->
   project(":$name") { 
     apply plugin: 'org.unbroken-dome.test-sets'
     apply plugin: 'org.flywaydb.flyway'

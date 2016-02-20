@@ -1,1 +1,1 @@
-truncate Entries;
+truncate Articles;

@@ -318,7 +318,7 @@
 					</nav>
 				</div>
 				<ul id="queue" class="queue_list queue_list_main">
-					<li th:each="entry : ${entries}"
+					<li th:each="entry : ${articles}"
 						class="item item_type_normal_excerpt adjusted">
 						<div class="item_content">
 							<img th:attr="src=|/link/image/${entry.entryId}|"></img>

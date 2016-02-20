@@ -88,7 +88,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.entry" });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.article" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

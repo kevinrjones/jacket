@@ -1,6 +1,6 @@
 package com.pluralsight.jacketweb.viewmodels;
 
-import com.pluralsight.jacket.entry.service.models.GetJacketArticle;
+import com.pluralsight.jacket.article.service.models.GetJacketArticle;
 
 public class Entry {
 	private String title;
@@ -8,7 +8,7 @@ public class Entry {
 	
 	public Entry(GetJacketArticle e) {
 		title = e.getTitle();
-		entryId = e.getEntryId();
+		entryId = e.getArticleId();
 	}
 	
 	public String getTitle() {

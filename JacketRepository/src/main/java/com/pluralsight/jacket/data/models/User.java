@@ -22,7 +22,7 @@ public class User extends BaseModel implements Serializable  {
     private String password;
 
     @OneToMany(mappedBy="user")
-    private Set<Entry> entries;
+    private Set<Article> articles;
     
     public User() {}
 
@@ -70,12 +70,12 @@ public class User extends BaseModel implements Serializable  {
         this.email = email;
     }
 
-    public Set<Entry> getEntries() {
-		return entries;
+    public Set<Article> getEntries() {
+		return articles;
 	}
 
-	public void setEntries(Set<Entry> entries) {
-		this.entries = entries;
+	public void setEntries(Set<Article> articles) {
+		this.articles = articles;
 	}
 
 	private static final long serialVersionUID = 2738859149330833739L;
