@@ -1,17 +1,17 @@
 package com.pluralsight.jacket.article.service;
 
+import static com.pluralsight.image.ImageConverter.getByteArrayFromImage;
+import static com.pluralsight.image.ImageConverter.getImageFromByteArray;
+
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.logging.Log;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.pluralsight.image.ImageConverter.getByteArrayFromImage;
-import static com.pluralsight.image.ImageConverter.getImageFromByteArray;
 
 import com.pluralsight.jacket.article.repository.ArticleRepository;
 import com.pluralsight.jacket.article.service.models.AddJacketArticle;
@@ -20,7 +20,7 @@ import com.pluralsight.jacket.data.models.Article;
 import com.pluralsight.jacket.data.models.User;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 
-@Named
+@Service
 @Transactional(readOnly = true)
 public class ArticleDetailsServiceOnArticleRepository implements JacketArticleService {
 
