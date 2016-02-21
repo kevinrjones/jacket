@@ -54,7 +54,7 @@ allprojects {
 }
 
 
-project(':Image') {
+project(':JacketImage') {
 }
 
 project(':JacketSecurity') {
@@ -67,7 +67,7 @@ project(':JacketArticles') {
     dependencies {
       compile project(':JacketRepository')
       compile project(':JacketSecurity')
-      compile project(':Image')
+      compile project(':JacketImage')
     }
 }
 
@@ -75,7 +75,7 @@ project(':JacketWeb') {
     dependencies {
       compile project(':JacketSecurity')
       compile project(':JacketArticles')
-      compile project(':Image')
+      compile project(':JacketImage')
     }
 }
 
