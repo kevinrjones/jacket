@@ -318,10 +318,10 @@
 					</nav>
 				</div>
 				<ul id="queue" class="queue_list queue_list_main">
-					<li th:each="entry : ${articles}"
+					<li th:each="article : ${articles}"
 						class="item item_type_normal_excerpt adjusted">
 						<div class="item_content">
-							<img th:attr="src=|/link/image/${entry.entryId}|"></img>
+							<img th:attr="src=|/article/image/${article.articleId}|"></img>
 						</div>
 					</li>
 				</ul>

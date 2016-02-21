@@ -22,11 +22,11 @@ import static com.pluralsight.image.ImageConverter.getByteArrayFromImage;
 import com.pluralsight.jacket.article.service.JacketArticleService;
 import com.pluralsight.jacket.article.service.models.GetJacketArticle;
 import com.pluralsight.jacket.security.service.models.AuthenticatedUser;
-import com.pluralsight.jacketweb.viewmodels.Entry;
+import com.pluralsight.jacketweb.viewmodels.Article;
 import com.pluralsight.security.CurrentUser;
 
 @Controller
-@RequestMapping(value = { "/", "/link" })
+@RequestMapping(value = { "/", "/article" })
 public class ArticleController {
 
 	private JacketArticleService service;
@@ -41,13 +41,13 @@ public class ArticleController {
 	@RequestMapping(value = { "/", "" })
 	public ModelAndView index(@CurrentUser AuthenticatedUser user) {
 		List<GetJacketArticle> serviceEntries = service.getAllArticles(user.getId());
-		List<Entry> articles = new ArrayList<Entry>();
+		List<Article> articles = new ArrayList<Article>();
 		serviceEntries.forEach(e -> {
-			Entry entry = new Entry(e);
+			Article entry = new Article(e);
 			articles.add(entry);
 		});
 
-		ModelAndView mv = new ModelAndView("link/index");
+		ModelAndView mv = new ModelAndView("article/index");
 		mv.addObject("articles", articles);
 		
 		return mv;

@@ -67,18 +67,8 @@ configurations {
 
 dependencies {
     def cargoVersion = '1.4.5'
-
-//    compile("org.springframework.boot:spring-boot-starter-data-rest")
-//    compile("org.springframework.boot:spring-boot-starter-hateoas")
-//    compile("org.springframework.boot:spring-boot-starter-jersey")
-//    compile("org.springframework.boot:spring-boot-starter-websocket")
-//    compile("org.springframework.boot:spring-boot-starter-ws")
-//    runtime("mysql:mysql-connector-java")
-
 	
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.boot:spring-boot-starter-jdbc"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
  	compile "org.springframework.boot:spring-boot-devtools"

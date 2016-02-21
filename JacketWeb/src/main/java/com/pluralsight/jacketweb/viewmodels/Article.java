@@ -2,13 +2,13 @@ package com.pluralsight.jacketweb.viewmodels;
 
 import com.pluralsight.jacket.article.service.models.GetJacketArticle;
 
-public class Entry {
+public class Article {
 	private String title;
-	private long entryId;
+	private long articleId;
 	
-	public Entry(GetJacketArticle e) {
+	public Article(GetJacketArticle e) {
 		title = e.getTitle();
-		entryId = e.getArticleId();
+		articleId = e.getArticleId();
 	}
 	
 	public String getTitle() {
@@ -18,11 +18,11 @@ public class Entry {
 		this.title = title;
 	}
 
-	public long getEntryId() {
-		return entryId;
+	public long getArticleId() {
+		return articleId;
 	}
 
-	public void setEntryId(long entryId) {
-		this.entryId = entryId;
+	public void setArticleId(long articleId) {
+		this.articleId = articleId;
 	}
 }
