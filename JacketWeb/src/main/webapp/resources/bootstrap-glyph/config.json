@@ -1,9 +1,0 @@
-{
-  "vars": {},
-  "css": [
-    "buttons.less",
-    "glyphicons.less"
-  ],
-  "js": [],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=48b45565947dc31ac573"
-}
