@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Jacket</title>
+
+<link th:href="@{/resources/bootstrap-glyph/css/bootstrap.css}"
+	rel="stylesheet" />
+<link th:href="@{/resources/css/site.css}" rel="stylesheet" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<script th:src="@{/resources/jquery/dist/jquery.js}"
+	type="text/javascript"></script>
+<!-- <script th:src="@{/resources/modernizr-min/dist/modernizr.min.js}" type="text/javascript"></script> -->
+
+</head>
+<body>
+<!-- com.pluralsight.jacket.security.service.models.AuthenticatedUser -->
+	<div
+		th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+		<div id="container" class="page-app-premiumcta">
+			<div id="page">
+				<div layout:fragment="content"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Place sticky footer content here.</p>
+		</div>
+	</footer>
+ -->
+	<script th:src="@{/resources/jquery/dist/jquery.min.js}"></script>
+	<script th:src="@{/resources/jquery-ui/ui/position.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/bootstrap-glyph/js/bootstrap.min.js}"></script>
+</body>
+</html>

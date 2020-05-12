@@ -1,4 +1,10 @@
 buildscript {
+    ext {
+        tomcatDbcpVersion = '9.0.34'
+        hibernateC3p0Version = "5.3.6.Final"
+        thymeleafLayoutDialectVersion = '2.4.1'
+    }
+
     repositories {
         jcenter()
     }
@@ -8,57 +14,30 @@ buildscript {
 }
 
 apply plugin: 'war'
-apply plugin: 'com.bmuschko.cargo'
-apply plugin: 'spring-boot'
+apply plugin: 'org.flywaydb.flyway'
 
-def os = System.getProperty("os.name").toLowerCase() 
-def tomcatHome = ""
-def tomcatHomeConfig = ""
-
-if(project.hasProperty('tomcat_home')) {
-	tomcatHome = project.tomcat_home 
-} else {
-    logger.error("tomcat_home not set. Please add a USER_HOME/.gradle/gradle.properties and add a tomcat_home value") 
-}
-if(project.hasProperty('tomcat_home_config')) {
-	tomcatHomeConfig = project.tomcat_home_config
-} else {
-    logger.error("tomcat_home_config not set. Please add a USER_HOME/.gradle/gradle.properties and add a tomcat_home_config value") 
-}
-
-cargo {
-    containerId = 'tomcat8x'
-    port = 8080
-
-    deployable {
-        file = file('build\\libs\\JacketWeb-0.0.1-SNAPSHOT.war')
-        context = 'jacketweb'
-    }
-
-    local {
-        homeDir = file(tomcatHome)
-        configHomeDir = file(tomcatHome)
-    }
-
-    remote {
-        // todo: put these in a properties?
-        hostname = 'localhost'
-        username = 'tomcat'
-        password = 'tomcat'
-    }
-}
 
 war {
-    baseName = 'JacketWeb'
-    version = '0.0.1-SNAPSHOT'    
+    archivesBaseName = 'JacketWeb'
+    archiveVersion = '0.5-SNAPSHOT'
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
     jcenter()
 }
 
+bootJar {
+    mainClassName = "com.pluralsight.jacketweb.app.JacketApplication"
+    metaInf {
+        from('src/main/webapp/META-INF') {
+            include 'context.xml'
+        }
+    }
+}
+
+bootRun {
+    main = 'com.pluralsight.jacketweb.app.JacketApplication'
+}
 
 configurations {
     providedRuntime
@@ -66,68 +45,54 @@ configurations {
 
 
 dependencies {
-    def cargoVersion = '1.4.5'
-	
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
- 	compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.apache.tomcat:tomcat-dbcp:8.0.27"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.boot:spring-boot-starter-security"
- 
+    implementation "org.springframework:spring-orm"
+
+    implementation "org.apache.tomcat:tomcat-dbcp:$tomcatDbcpVersion"
+    implementation "javax.servlet:jstl"
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+    implementation "org.hibernate:hibernate-c3p0:$hibernateC3p0Version"
+    implementation "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:$thymeleafLayoutDialectVersion"
+
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
     providedRuntime "org.apache.tomcat.embed:tomcat-embed-jasper"
 
-    compile "javax.servlet:jstl"
-    
-    compile 'javax.inject:javax.inject:1'
-    compile 'c3p0:c3p0:0.9.1.2'    
-    
-    compile "org.springframework:spring-orm:4.1.7.RELEASE"
-    
-    testCompile("org.springframework.boot:spring-boot-starter-test") 
-
-    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
-          "org.codehaus.cargo:cargo-ant:$cargoVersion"
-    
-}
-
-tasks.withType(Copy) {
-    eachFile { println it.file }
 }
 
 // must set the jacket_password environment variable for the production password
-task copyContext (type: Copy) {	
-	from 'configfiles'			
+task copyContext (type: Copy) {
+    from 'configfiles'
     into 'src/main/webapp/META-INF'
     include 'context.xml'
-    
+
     expand(password: "$System.env.jacket_password")
 }
 
-task copyProperties (type: Copy) {	
-	from 'configfiles'			
+task copyProperties (type: Copy) {
+    from 'configfiles'
     into 'src/main/resources'
     include 'application.properties'
-    
+
     expand(password: "$System.env.jacket_password")
 }
 
 task copyConfiguration {
-	description 'Copy and expand the configuration files used by the project'
-	dependsOn copyContext, copyProperties
+    description 'Copy and expand the configuration files used by the project'
+    dependsOn copyContext, copyProperties
 }
 
 processResources.dependsOn copyConfiguration
 
-cargoRunLocal.dependsOn assemble
-cargoRedeployLocal.dependsOn assemble
-cargoRedeployRemote.dependsOn assemble
-
 eclipse {
     classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
 }
-    

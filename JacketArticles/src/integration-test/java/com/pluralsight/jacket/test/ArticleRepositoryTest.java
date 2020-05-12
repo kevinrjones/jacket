@@ -9,7 +9,7 @@ import com.pluralsight.jacket.article.repository.ArticleRepository;
 import com.pluralsight.jacket.data.models.Article;
 import com.pluralsight.repository.AbstractTest;
 
-public class ArticlesRepositoryTest extends AbstractTest {
+public class ArticleRepositoryTest extends AbstractTest {
 	@Autowired
 	ArticleRepository repository;
 	private int count;

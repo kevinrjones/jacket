@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialException;
 
@@ -24,7 +25,7 @@ import com.pluralsight.jacket.data.models.Article;
 import com.pluralsight.jacket.data.models.User;
 import com.pluralsight.jacket.security.repository.UsersRepository;
 
-public class JacketEntryServiceOnRepositoryTest {
+public class JacketArticleServiceOnRepositoryTest {
 	ArticleDetailsServiceOnArticleRepository jacketEntryServiceOnRepository;
 	ArticleRepository entryRepository;
 	UsersRepository usersRepository;
@@ -63,7 +64,7 @@ public class JacketEntryServiceOnRepositoryTest {
 		user.setId(1L);
 		entryIn.setUser(user);
 		entryIn.setImage(new byte[0]);
-		when(entryRepository.findOne(id)).thenReturn(entryIn);
+		when(entryRepository.findById(id)).thenReturn(Optional.of(entryIn));
 
 		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
 		GetJacketArticle entry = service.getArticle(id);
@@ -75,7 +76,7 @@ public class JacketEntryServiceOnRepositoryTest {
 	public void getEntry_should_throw_an_exception_when_the_id_is_wrong() {
 
 		long id = 1;
-		when(entryRepository.findOne(id)).thenReturn(null);
+		when(entryRepository.findById(id)).thenReturn(Optional.empty());
 
 		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
 		service.getArticle(id);
@@ -98,7 +99,7 @@ public class JacketEntryServiceOnRepositoryTest {
 
 		entry.setImage(new byte[0]);
 
-		when(entryRepository.findOne(id)).thenReturn(entry);
+		when(entryRepository.findById(id)).thenReturn(Optional.of(entry));
 
 		service = new ArticleDetailsServiceOnArticleRepository(entryRepository, usersRepository, log);
 		GetJacketArticle jacketEntry = service.getArticle(id);

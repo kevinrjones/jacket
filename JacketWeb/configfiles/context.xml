@@ -10,7 +10,7 @@
             maxActive="100"
             maxIdle="100"
             minIdle="25"
-            driverClassName="com.mysql.jdbc.Driver"
+            driverClassName="com.mysql.cj.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/jacket?useSSL=false"
             factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
             />

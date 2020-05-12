@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/main"
+	class="js flexbox flexboxlegacy no-touch history cssanimations 
+	csstransforms csstransforms3d csstransitions localstorage wf-ffyogawebpro-i4-active 
+	wf-ffyogawebpro-i7-active wf-ffyogawebpro-n4-active wf-ffyogawebpro-n7-active 
+	wf-proximanova-i4-active wf-proximanova-i7-active wf-proximanova-n3-active 
+	wf-proximanova-n4-active wf-proximanova-n6-active wf-proximanova-n7-active wf-active">
+<head>
+<title>Hello World</title>
+</head>
+<body class="page-queue page-queuelight page-skinlight page-app-en-us">
+
+	<div layout:fragment="content">
+		<nav class="pkt-nav">
+			<div
+				class="toolbar_queue toolbar navigationItem wrapper wrapper_full active">
+				<div class="toolbar_queue_divider"></div>
+				<h1 class="jacket_logo">Jacket</h1>
+				<ul class="icons leftItem">
+					<li id="pagenav_sidenav" class="pagenav_sidenav"><a href="#"
+						class="header-nav-toggle"><span></span></a> <span
+						class="inbox_badge"></span></li>
+					<li class="pagenav_queuedetail">
+						<h2 class="queue_title queue_title_main queue_title_queue">My
+							List</h2> <a
+						class="queue_toggle_listqueue queue_toggle_listqueueprimary"
+						href="#"> <span class="nav-toggledetail">in My List</span> <span
+							class="nav-togglenotch"></span>
+							<div id="" class="dropSelector toggle_listqueue_container"
+								style="">
+								<a></a>
+								<div class="popover-new popover-new-bottom">
+									<div class="popover-new-header">
+										<a class="popover-new-close" href="#"></a>
+									</div>
+									<div class="arrow"></div>
+									<ul class="popover-new-list">
+										<li class="popover-new-listitem mylist" val="mylist"><a
+											href="#">My List</a></li>
+										<li class="popover-new-listitem favorites" val="favorites"><a
+											href="#">Favorites</a></li>
+<!-- 										<li class="popover-new-listitem archive last" val="archive"><a
+											href="#">Archive</a></li> -->
+									</ul>
+								</div>
+							</div></a>
+					</li>
+					<li class="pagenav_sectiontoggle"><a
+						class="queue_togglesection_option queue_togglesection_optionselected queue_togglesection_home">
+							<span class="queue_togglesection_text">Home</span>
+					</a> <a
+						class="queue_togglesection_option queue_togglesection_recommended">
+							<span class="queue_togglesection_text">Recommended</span>
+					</a></li>
+				</ul>
+				<ul class="icons rightItem">
+					<!-- <li id="pagenav_searchicon" class="pagenav_searchicon"><a
+						id="nav_search" role="button" class="btn btn-default"
+						aria-label="Left Align" data-toggle="popover"
+						data-placement="bottom" tabindex='1'> <span
+							class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a></li> -->
+					<li id="pagenav_addarticle"><a id="nav_add" role="button"
+						class="btn btn-default" aria-label="Left Align"
+						data-toggle="popover" data-placement="bottom" tabindex='1'> <span
+							class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</a></li>
+					<li id="pagenav_inbox"></li>
+					<li id="pagenav_optionsdivider" class="pagenav_optionsdivider">
+						<a href="#"></a>
+					</li>
+					<li id="pagenav_options"><a class="pagenav_options_link"
+						title="" href="#"> <span class="nav-avatar"
+							style="background-image: url(https://img.readitlater.com/i/lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo/RS/w80-h80.jpg?&amp;amp;ssl=1);"></span>
+							<span class="nav-username" th:text="${currentUser?.name}">Bob</span>
+							<!-- <span class="nav-username">Kevin</span> --> <span
+							class="nav-downnotch"></span>
+					</a>
+						<div id="pagenav_options_container" class="dropSelector" style="">
+							<!--
+							<div class="nav navbar-left" th:if="${currentUser !=null}">
+								<form class="navbar-form" th:action="@{/account/logout}"
+									method="post">
+									<div class="input-group">
+										<button type="submit" class="button btn-link" th:text="#{logout}">Log Out</button>
+									</div>
+								</form>
+							</div>
+						 -->
+							<a></a>
+							<div class="popover-new popover-new-bottomleft">
+								<div class="popover-new-header">
+									<a class="popover-new-close" href="#"></a>
+								</div>
+								<div class="arrow"></div>
+								<ul class="popover-new-list">
+									<li class="popover-new-listitem profile" val="profile"><a
+										href="#"><span class="popover-profile-avatar"
+											style="background-image: url(https://img.readitlater.com/i/lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo/RS/w80-h80.jpg?&amp;amp;ssl=1);"></span>
+											<span class="popover-profile-text">
+												<h5 class="popover-profile-name">Kevin Jones</h5>
+												<p class="popover-profile-desc">View Profile</p>
+										</span></a></li>
+									<li class="popover-new-listitem premium" val="premium"><a
+										href="#">Premium<span class="nav-icon"></span></a></li>
+									<li class="popover-new-listitem help" val="help"><a
+										href="#">Help<span class="nav-icon"></span></a></li>
+									<li class="popover-new-listitem options" val="options"><a
+										href="#">Options<span class="nav-icon"></span></a></li>
+									<li class="popover-new-listitem logout last" val="logout"><a
+										href="#">Logout<span class="nav-icon"></span></a></li>
+								</ul>
+							</div>
+						</div></li>
+				</ul>
+				<nav class="expanded_toggle expanded_toggle_filter">
+					<ul>
+						<li><a
+							class="expanded_toggle_mylist expanded_toggle_selected" href="#">My
+								List</a></li>
+						<li><a class="expanded_toggle_archive" href="#">Archive</a></li>
+					</ul>
+				</nav>
+				<div class="container-bulkedit">
+					<div class="bulkedit-content">
+						<div class="bulkedit-status">
+							<p></p>
+						</div>
+						<div class="bulkedit-actions">
+							<ul>
+								<li class="bulkedit-archive"><a href="#"> <span
+										class="bulkedit-icon"></span> <span class="bulkedit-desc">Archive</span>
+								</a></li>
+								<li class="bulkedit-favorite"><a href="#"> <span
+										class="bulkedit-icon"></span> <span class="bulkedit-desc">Favorite</span>
+								</a></li>
+								<li class="bulkedit-delete"><a href="#"> <span
+										class="bulkedit-icon"></span> <span class="bulkedit-desc">Delete</span>
+								</a></li>
+								<li class="bulkedit-addtag"><a href="#"> <span
+										class="bulkedit-icon"></span> <span class="bulkedit-desc">Add
+											Tag</span>
+								</a></li>
+							</ul>
+						</div>
+						<a class="bulkedit-cancel" href="#"></a>
+					</div>
+				</div>
+			</div>
+			<div class="searchtoolbar_screenbar"></div>
+			<div
+				class="searchtoolbar_queue toolbar navigationItem wrapper wrapper_full">
+				<h1 class="jacket_logo">Jacket</h1>
+				<ul class="icons leftItem">
+					<li><h2></h2></li>
+				</ul>
+				<ul class="icons rightItem">
+					<li id="searchnav_sortby" class="searchnav-sortby-relevancy">
+						<a class="hint-item" title="Sort results by" href="#">Sort
+							results by</a>
+					</li>
+					<li class="section-filter section-filter-disabled">
+						<div class="section-filter-value hint-item" title="Search Options">
+							<span class="section-filter-value-text">All Items</span> <span
+								class="section-filter-downnotch"></span>
+						</div>
+						<ul class="section-filter-options">
+							<li><a class="mylist" href="#">My List</a></li>
+							<li><a class="archive" href="#">Archive</a></li>
+						</ul>
+					</li>
+					<li class="wrapper_search clearfix">
+						<div class="search-input-wrapper">
+							<ul class="search-input-list">
+								<li class="search-input"><input id="page_search"
+									type="text" placeholder="Search" maxlength="100" /></li>
+							</ul>
+						</div>
+						<ul class="search-instr-recent">
+							<li class="instructions instructions-basic">Search by Title
+								or URL.</li>
+						</ul>
+					</li>
+					<li id="search_close"><a href="#">Close</a></li>
+				</ul>
+				<nav class="expanded_toggle expanded_toggle_search">
+					<ul>
+						<li><a
+							class="expanded_toggle_mylist expanded_toggle_selected" href="#">My
+								List</a></li>
+						<li><a class="expanded_toggle_archive" href="#">Archive</a></li>
+					</ul>
+				</nav>
+			</div>
+		</nav>
+		<div class="side-screen"></div>
+		<div class="side-nav">
+			<div class="nav-content nav-content-header">
+				<a href="#" class="header-nav-toggle header-nav-toggle-close"><span></span></a>
+				<h2>Jacket</h2>
+			</div>
+			<div class="nav-content nav-content-main">
+				<nav class="nav-default">
+					<ul>
+						<li><a class="section-mylist nav-selected" href="#"><span
+								class="nav-icon"></span>My List</a></li>
+						<li class="section-recommendedcontainer"><a
+							class="section-recommended" href="#">Recommended</a></li>
+						<li><a class="section-favorites" href="#"><span
+								class="nav-icon"></span>Favorites</a></li>
+						<li><a class="section-archive" href="#"><span
+								class="nav-icon"></span>Archive</a></li>
+						<li class="nav-default-divider"></li>
+						<li><a class="nav-sublist filter-articles" href="#"><span>Articles</span></a></li>
+<!-- 						<li><a class="nav-sublist filter-videos" href="#"><span>Videos</span></a></li>
+						<li><a class="nav-sublist filter-images" href="#"><span>Images</span></a></li> -->
+ 						<li><a class="filter-tags" href="#"><span
+								class="nav-icon"></span>Tags <span class="nav-rarrow">›</span></a></li>
+						<li><a class="section-inbox" href="#"><span
+								class="nav-icon"></span> <span class="inbox_badge"></span> Inbox</a></li>
+					</ul>
+				</nav>
+				<nav class="nav-default nav-secondary">
+					<ul>
+						<li><a class="nav-minorlist section-profile" href="#"><span
+								class="nav-icon"></span>View Profile</a></li>
+						<li><a class="nav-minorlist section-premium" href="#"><span
+								class="nav-icon"></span>Premium</a></li>
+						<li><a class="nav-minorlist section-options" href="#"><span
+								class="nav-icon"></span>Options</a></li>
+						<li><a class="nav-minorlist section-help" href="#"><span
+								class="nav-icon"></span>Help</a></li>
+						<li><a class="nav-minorlist section-logout" href="#"><span
+								class="nav-icon"></span>Logout</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="nav-content nav-content-recommend"></div>
+			<div class="wrapper_tag">
+				<div class="tag_name"></div>
+				<a class="tag_clear" href="" title="Clear Tag Selection">Clear
+					Tag Selection</a>
+				<div id="pagenav_tagfilter"
+					class="dropSelector titleItem titleSelector"
+					style="display: block;">
+					<a class="all hint_queue" title="Tag Filter"><span>All
+							Items</span></a>
+					<div class="popover-new popover-new-centeredleft">
+						<div class="popover-new-header">
+							<a class="popover-new-close" href="#"></a>
+						</div>
+						<div class="arrow"></div>
+						<ul class="popover-new-list">
+							<li class="popover-new-listitem all selected" val="all"><a
+								href="#">All Items</a></li>
+							<li class="popover-new-listitem untagged last" val="untagged"><a
+								href="#">Untagged Items</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="notifications-error clearfix">
+			<div class="content">
+				<p class="message"></p>
+			</div>
+		</div>
+		<div class="notifications-sync clearfix">
+			<div class="content clearfix">
+				<div class="progress-bar">
+					<div class="progress-bar-content progress-bar-zeroed"></div>
+				</div>
+				<p class="message"></p>
+			</div>
+		</div>
+		<div class="reading_progress">
+			<div class="reading_progress_bar"></div>
+		</div>
+		<div id="content">
+			<div id="page_queue"
+				class="wrapper wrapper_full page_queue_grid active">
+				<div class="queue_secondarynav queue_secondarynav_main">
+					<h2 class="queue_title queue_title_main queue_title_queue">My
+						List</h2>
+					<a class="queue_toggle_listqueue queue_toggle_listqueuesecondary"
+						href="#"> <span class="nav-toggledetail">in My List</span> <span
+						class="nav-togglenotch"></span>
+						<div id="" class="dropSelector toggle_listqueue_container"
+							style="">
+							<a></a>
+							<div class="popover-new popover-new-bottom">
+								<div class="popover-new-header">
+									<a class="popover-new-close" href="#"></a>
+								</div>
+								<div class="arrow"></div>
+								<ul class="popover-new-list">
+									<li class="popover-new-listitem mylist" val="mylist"><a
+										href="#">My List</a></li>
+									<li class="popover-new-listitem favorites" val="favorites"><a
+										href="#">Favorites</a></li>
+									<li class="popover-new-listitem archive last" val="archive"><a
+										href="#">Archive</a></li>
+								</ul>
+							</div>
+						</div></a>
+					<nav class="queue_secondarynav_actions">
+						<ul>
+							<li class="pagenav_gridlist pagenav_gridview"><a
+								class="hint_queue" data-intro="Tile/List View Toggle"
+								data-position="bottom" href="/a/queue/list/"
+								title="Switch to List View">Tile View</a></li>
+							<li class="pagenav_bulkedit"><a class="hint_queue"
+								title="Bulk Edit" data-intro="Bulk Edit"
+								data-position="bottomlower" href="#">Bulk Edit</a></li>
+						</ul>
+					</nav>
+				</div>
+				<ul id="queue" class="queue_list queue_list_main">
+					<li th:each="article : ${articles}"
+						class="item item_type_normal_excerpt adjusted">
+						<div class="item_content">
+							<img th:attr="src=|/article/image/${article.articleId}|"></img>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<footer>
+			<div class="wrapper wrapper_full"></div>
+		</footer>
+
+		<div id='popover_container'>
+			<div id="nav_search_title" style='display: none'>Save an item
+				to Jacket</div>
+			<div id="nav_search_content" style='display: none'>
+				<div class="container" id='nav_search_content_container'>
+					<input type="text" placeholder="http://..." /><a href="#"
+						class="button button-disabled">Save</a>
+				</div>
+			</div>
+			<div id="nav_add_title" style='display: none'>Save an item to
+				Jacket</div>
+			<div id="nav_add_content" style='display: none'>
+				<div class="container" id='nav_add_content_container'>
+					<input type="text" placeholder="http://..." /><a href="#"
+						class="button button-disabled">Save</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

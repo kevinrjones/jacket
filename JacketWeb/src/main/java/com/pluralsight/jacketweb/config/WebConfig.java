@@ -1,23 +1,16 @@
 package com.pluralsight.jacketweb.config;
 
-import java.util.Properties;
-
-import javax.inject.Inject;
-import javax.naming.NamingException;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import org.apache.catalina.Context;
+import org.apache.catalina.startup.Tomcat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.spi.LoggerFactory;
+import org.apache.tomcat.util.descriptor.web.ContextResource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -29,44 +22,21 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.inject.Inject;
+import javax.naming.NamingException;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan(basePackages = "com.pluralsight")
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.pluralsight.jacket")
 @EnableTransactionManagement
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-
-	@Inject
-	private ThymeleafProperties properties;
-
-	@Bean
-	public SpringResourceTemplateResolver getSpringResourceTemplateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".html");
-		resolver.setTemplateMode("HTML5");
-		resolver.setCacheable(properties.isCache());
-
-		return resolver;
-	}
 
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
@@ -88,7 +58,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setPersistenceUnitName("jacket");
 		em.setDataSource(dataSource);
-		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.security", "com.pluralsight.jacket.article" });
+		em.setPackagesToScan(new String[] { "com.pluralsight.jacket.data.models", "com.pluralsight.jacket.security", "com.pluralsight.jacket.article" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -111,7 +81,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Profile("dev")
 	public DataSource dataSourceDev() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/jacket?useSSL=false");
 		dataSource.setUsername("jacket");
 		dataSource.setPassword("p4ssw0rd");
@@ -144,4 +114,33 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return messageSource;
 	}
 
+
+	@Bean
+	public TomcatServletWebServerFactory tomcatFactory() {
+
+		return new TomcatServletWebServerFactory() {
+
+			@Override
+			protected TomcatWebServer getTomcatWebServer(Tomcat tomcat)
+			{
+				tomcat.enableNaming();
+				return super.getTomcatWebServer(tomcat);
+			}
+
+			@Override
+			protected void postProcessContext(Context context)
+			{
+				ContextResource resource = new ContextResource();
+				resource.setName("jdbc/JacketDB");
+				resource.setType(DataSource.class.getName());
+				resource.setProperty("driverClassName", "com.mysql.cj.jdbc.Driver");
+
+				resource.setProperty("url", "jdbc:mysql://localhost:3306/jacketdb?useSSL=false");
+				resource.setProperty("username", "jacket");
+				resource.setProperty("password", "p4ssw0rd");
+				context.getNamingResources()
+						.addResource(resource);
+			}
+		};
+	}
 }

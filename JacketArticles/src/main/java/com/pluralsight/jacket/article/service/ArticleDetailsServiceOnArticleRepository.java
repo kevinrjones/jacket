@@ -6,6 +6,7 @@ import static com.pluralsight.image.ImageConverter.getImageFromByteArray;
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -68,10 +69,10 @@ public class ArticleDetailsServiceOnArticleRepository implements JacketArticleSe
 		if (jacketEntry.getImage() == null)
 			throw new JacketServiceException("Unable to add an entry for " + jacketEntry);
 
-		User user = userRepository.findOne(jacketEntry.getUserId());
+		var user = userRepository.findById(jacketEntry.getUserId());
 		Article entry = new Article();
 
-		entry.setUser(user);		
+		entry.setUser(user.get());
 		entry.setTitle(jacketEntry.getTitle());
 		entry.setUrl(jacketEntry.getUrl());
 		entry.setImage(getByteArrayFromImage(jacketEntry.getImage(), log));
@@ -82,14 +83,16 @@ public class ArticleDetailsServiceOnArticleRepository implements JacketArticleSe
 
 	@Override
 	public GetJacketArticle getArticle(long id) {
-		Article entry = entryRepository.findOne(id);
+		Optional<Article> optionalArticle = entryRepository.findById(id);
 
-		if (entry == null)
+		if (optionalArticle.isEmpty())
 			throw new JacketServiceException("Unable to find entry in repository for id " + id);
-		Long userId = entry.getUser().getId(); 
-		String url = entry.getUrl(); 
-		String title = entry.getTitle();
-		Long entryid = entry.getId();
+
+		var article = optionalArticle.get();
+		Long userId = article.getUser().getId();
+		String url = article.getUrl();
+		String title = article.getTitle();
+		Long entryid = article.getId();
 		
 		GetJacketArticle jacketEntry = new GetJacketArticle(userId, url, title, entryid);
 
@@ -98,11 +101,13 @@ public class ArticleDetailsServiceOnArticleRepository implements JacketArticleSe
 	
 	@Override
 	public Image getArticleImage(Long entryId) {
-		Article entry = entryRepository.findOne(entryId);
+		var optionalArticle = entryRepository.findById(entryId);
 
-		if (entry == null)
+
+		if (optionalArticle.isEmpty())
 			throw new JacketServiceException("Unable to find entry in repository for id " + entryId);
 
+		var entry = optionalArticle.get();
 		byte[] bytes = entry.getImage();
 		return getImageFromByteArray(bytes, log);
 	}

@@ -4,10 +4,14 @@ buildscript {
     }
 }
 
-apply plugin: 'spring-boot'
+jar {
+    enabled = true
+    archiveBaseName = 'JacketImage'
+    archiveVersion = '0.5-SNAPSHOT'
+}
 
-bootRepackage {
-  enabled = false
+bootJar {
+    enabled = false
 }
 
 
